@@ -1,4 +1,4 @@
-const CACHE = "recipes-v4";
+const CACHE = "recipes-v5";
 const ASSETS = ["/", "/index.html"];
 
 self.addEventListener("install", e => {

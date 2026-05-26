@@ -9,9 +9,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Our Recipes" />
   <link rel="manifest" href="/manifest.json" />
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <script>
+    // Show error if scripts fail to load
+    window.onerror = function() {
+      document.getElementById("root").innerHTML = '<div style="color:#7bc87a;text-align:center;padding:60px 20px;font-family:Georgia,serif"><div style="font-size:40px;margin-bottom:16px">⚠️</div><div style="font-size:18px;margin-bottom:8px">App failed to load</div><div style="font-size:14px;color:#5a8a68">Please refresh the page</div></div>';
+    };
+  </script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0d1a14; font-family: Georgia, serif; }
