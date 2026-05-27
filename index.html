@@ -1,436 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DataIsCool — Your Apps</title>
-<meta name="description" content="A personal hub for all DataIsCool apps.">
-<meta name="theme-color" content="#0d1a14">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg:       #0a1510;
-    --bg2:      #0d1a14;
-    --card:     #111f18;
-    --card2:    #162a1f;
-    --border:   #1e3528;
-    --border2:  #2a4a35;
-    --accent:   #7bc87a;
-    --accent2:  #a8e0a6;
-    --gold:     #c8a84b;
-    --text:     #e8f5e2;
-    --muted:    #6a9a78;
-    --dim:      #3d6b4f;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataIsCool — Your Apps</title>
+  <meta name="description" content="A personal hub for all DataIsCool apps." />
+  <meta name="theme-color" content="#1e3028" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky:     #c8e0a8;
+      --bg:      #1e3028;
+      --card:    #2a4038;
+      --card2:   #304840;
+      --border:  #3a5848;
+      --border2: #4a6858;
+      --accent:  #6db870;
+      --gold:    #c8a84b;
+      --text:    #e8f0e4;
+      --muted:   #9ab89a;
+      --dim:     #6a8a6a;
+      --faint:   #3a5a3a;
+    }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ── World background ── */
+    .world {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .world::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        #c8e0a8 0%,
+        #a0c890 8%,
+        #70a870 18%,
+        #3a6848 35%,
+        #243830 55%,
+        #1a2e24 100%
+      );
+    }
+    .world::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 120% 40% at 50% 20%, rgba(180,220,160,0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 20% at 75% 28%, rgba(200,168,75,0.07) 0%, transparent 50%);
+    }
+    .mountains { position: absolute; bottom: 0; left: 0; width: 100%; }
+    .ground-fade {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 70%;
+      background: linear-gradient(to top, var(--bg) 0%, var(--bg) 25%, rgba(30,48,40,0.92) 50%, transparent 100%);
+    }
+    .birds {
+      position: absolute; top: 5%; left: 55%;
+      opacity: 0.3;
+    }
 
-  html { scroll-behavior: smooth; }
+    #page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    /* ── Header ── */
+    header {
+      padding: 64px 0 52px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.1s;
+    }
+    .logo-row {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+    }
+    .logo-mark {
+      width: 48px; height: 48px;
+    }
+    .logo-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      line-height: 1.05;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      font-size: 15px; color: var(--muted);
+      max-width: 420px; line-height: 1.65; font-weight: 400;
+    }
 
-  /* ── Noise texture overlay ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoistargetsssrecipesecipeseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, rgba(109,184,112,0.3), rgba(109,184,112,0.1), transparent);
+      margin: 8px 0 40px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.35s;
+    }
 
-  /* ── Layered forest background ── */
-  .forest-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .forest-bg::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 60%;
-    background: linear-gradient(to top,
-      #040d08 0%,
-      #071109 20%,
-      #0a1510 50%,
-      transparent 100%
-    );
-  }
-  .tree-layer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0.18;
-  }
-  .tree-layer svg { display: block; width: 100%; }
+    /* ── Section label ── */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--faint);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.45s;
+    }
 
-  /* ── Mist glow ── */
-  .glow-orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .glow-orb.top  { width: 600px; height: 400px; top: -150px; left: 50%; transform: translateX(-50%); background: radial-gradient(ellipse, rgba(123,200,122,0.07) 0%, transparent 70%); }
-  .glow-orb.mid  { width: 400px; height: 300px; top: 40%; right: -100px; background: radial-gradient(ellipse, rgba(200,168,75,0.04) 0%, transparent 70%); }
+    /* ── App grid ── */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
 
-  /* ── Layout ── */
-  .page {
-    position: relative;
-    z-index: 1;
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
-  }
+    /* ── App card ── */
+    .app-card {
+      background: rgba(36,56,48,0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(100,160,100,0.15);
+      border-radius: 18px;
+      padding: 28px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .app-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(109,184,112,0.05) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .app-card:hover::before { opacity: 1; }
+    .app-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(109,184,112,0.3);
+      background: rgba(42,64,56,0.85);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .app-card.coming { cursor: default; }
+    .app-card.coming:hover { transform: none; box-shadow: none; }
 
-  /* ── Header ── */
-  header {
-    padding: 56px 0 48px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.1s;
-  }
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: rgba(20,40,30,0.6);
+      border: 1px solid rgba(100,160,100,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+    }
+    .card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px; color: var(--text);
+      margin-bottom: 6px; letter-spacing: -0.01em;
+    }
+    .card-desc {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.6; font-weight: 400;
+    }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between; margin-top: auto;
+    }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 12px;
+      border-radius: 20px; font-weight: 500;
+    }
+    .tag-live {
+      background: rgba(109,184,112,0.15);
+      color: var(--accent);
+      border: 1px solid rgba(109,184,112,0.25);
+    }
+    .tag-soon {
+      background: rgba(58,90,58,0.3);
+      color: var(--faint);
+      border: 1px solid rgba(100,160,100,0.1);
+    }
+    .card-arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(109,184,112,0.12);
+      border: 1px solid rgba(109,184,112,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 14px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .app-card:hover .card-arrow {
+      background: rgba(109,184,112,0.22);
+      transform: translateX(2px);
+    }
 
-  .logo-mark {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .logo-mark svg { width: 44px; height: 44px; }
-  .logo-text {
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
+    /* ── Footer ── */
+    footer {
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(100,160,100,0.12);
+      display: flex; align-items: center; justify-content: space-between;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.9s;
+    }
+    .footer-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--faint);
+      letter-spacing: 0.08em;
+    }
 
-  .hero-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.6rem, 6vw, 4.2rem);
-    line-height: 1.05;
-    color: var(--text);
-    letter-spacing: -0.02em;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
+    /* ── Animation ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
 
-  .hero-sub {
-    font-size: 15px;
-    color: var(--muted);
-    max-width: 440px;
-    line-height: 1.6;
-    font-weight: 400;
-  }
-
-  /* ── Divider ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(to right, var(--border2), var(--border), transparent);
-    margin: 8px 0 40px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.4s;
-  }
-
-  /* ── Section label ── */
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--dim);
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.5s;
-  }
-
-  /* ── App grid ── */
-  .app-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
-  }
-
-  /* ── App card ── */
-  .app-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    text-decoration: none;
-    color: var(--text);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-  }
-  .app-card:nth-child(1) { animation-delay: 0.55s; }
-  .app-card:nth-child(2) { animation-delay: 0.65s; }
-  .app-card:nth-child(3) { animation-delay: 0.75s; }
-  .app-card:nth-child(4) { animation-delay: 0.85s; }
-
-  .app-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(123,200,122,0.04) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  .app-card:hover::before { opacity: 1; }
-  .app-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--border2);
-    background: var(--card2);
-  }
-
-  .app-card.coming-soon {
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-    cursor: default;
-  }
-  .app-card.coming-soon:hover { transform: none; }
-
-  .card-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: var(--card2);
-    border: 1px solid var(--border2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-
-  .card-body { flex: 1; }
-
-  .card-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-    letter-spacing: -0.01em;
-  }
-
-  .card-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.55;
-    font-weight: 400;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .card-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-weight: 500;
-  }
-  .card-tag.live {
-    background: rgba(123,200,122,0.12);
-    color: var(--accent);
-    border: 1px solid rgba(123,200,122,0.2);
-  }
-  .card-tag.soon {
-    background: rgba(61,107,79,0.2);
-    color: var(--dim);
-    border: 1px solid var(--border);
-  }
-
-  .card-arrow {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: rgba(123,200,122,0.1);
-    border: 1px solid rgba(123,200,122,0.2);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--accent);
-    font-size: 13px;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .app-card:hover .card-arrow {
-    background: rgba(123,200,122,0.18);
-    transform: translateX(2px);
-  }
-
-  /* ── Footer ── */
-  footer {
-    margin-top: 80px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 1s;
-  }
-  .footer-brand {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--dim);
-    letter-spacing: 0.08em;
-  }
-  .footer-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 0.4;
-  }
-
-  /* ── Animations ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── Mobile ── */
-  @media (max-width: 540px) {
-    .page { padding: 0 16px 60px; }
-    header { padding: 40px 0 36px; }
-    .app-grid { grid-template-columns: 1fr; }
-  }
-</style>
+    /* ── Mobile ── */
+    @media (max-width: 540px) {
+      #page { padding: 0 16px 60px; }
+      header { padding: 44px 0 36px; }
+      .app-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.2rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Forest atmosphere -->
-<div class="glow-orb top"></div>
-<div class="glow-orb mid"></div>
-
-<div class="forest-bg">
-  <!-- Far background trees -->
-  <div class="tree-layer" style="bottom: 0; opacity: 0.10;">
-    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,320 L0,220 L60,180 L90,200 L130,140 L160,160 L200,100 L230,130 L270,80 L300,110 L340,60 L370,90 L410,50 L440,80 L480,120 L510,90 L550,130 L590,70 L620,100 L660,50 L700,80 L740,30 L770,60 L810,90 L840,50 L880,80 L920,40 L950,70 L990,100 L1020,60 L1060,90 L1100,50 L1130,80 L1170,120 L1200,80 L1240,110 L1280,70 L1310,100 L1350,140 L1380,110 L1440,160 L1440,320 Z" fill="#1a3a25"/>
+<div class="world">
+  <div class="birds">
+    <svg width="140" height="50" viewBox="0 0 140 50" fill="none">
+      <path d="M8 28 Q12 23 16 28" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M26 20 Q31 15 36 20" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M50 12 Q55 7 60 12" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M72 16 Q77 11 82 16" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M96 8 Q101 3 106 8" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M118 20 Q122 15 126 20" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
     </svg>
   </div>
-  <!-- Near foreground silhouette -->
-  <div class="tree-layer" style="bottom: 0; opacity: 0.22;">
-    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,200 L0,160 L20,140 L40,160 L55,120 L70,145 L85,100 L100,130 L115,90 L130,115 L145,80 L160,105 L175,130 L190,100 L210,140 L230,110 L250,150 L270,120 L290,160 L310,130 L330,160 L360,110 L390,140 L420,100 L450,130 L480,90 L510,120 L540,80 L570,110 L600,140 L630,100 L660,130 L690,80 L720,110 L750,150 L780,110 L810,140 L840,90 L870,120 L900,80 L930,110 L960,140 L990,100 L1020,130 L1050,90 L1080,120 L1110,80 L1140,110 L1170,140 L1200,110 L1230,140 L1260,100 L1290,130 L1320,90 L1350,120 L1380,150 L1410,130 L1440,160 L1440,200 Z" fill="#0d2018"/>
+  <div class="mountains">
+    <svg viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;width:100%;height:auto;min-height:240px;">
+      <!-- Far range -->
+      <path d="M0,500 L0,320 L80,260 L160,295 L240,215 L320,265 L400,175 L480,225 L560,145 L640,195 L720,115 L800,165 L880,95 L960,155 L1040,75 L1120,135 L1200,155 L1280,115 L1360,175 L1440,135 L1440,500 Z" fill="#3a6040" opacity="0.5"/>
+      <!-- Mid range -->
+      <path d="M0,500 L0,375 L100,315 L180,345 L260,275 L360,305 L440,245 L520,285 L600,215 L680,255 L760,195 L840,235 L920,175 L1000,215 L1080,165 L1160,205 L1260,235 L1340,195 L1440,235 L1440,500 Z" fill="#2d5035" opacity="0.65"/>
+      <!-- Near hills -->
+      <path d="M0,500 L0,435 L120,385 L220,405 L320,365 L420,385 L520,345 L620,375 L720,335 L820,365 L920,325 L1040,355 L1140,325 L1260,355 L1360,335 L1440,355 L1440,500 Z" fill="#243830" opacity="0.85"/>
+      <!-- Foreground tree silhouette -->
+      <path d="M0,500 L0,458 L25,438 L35,458 L50,418 L62,442 L78,398 L88,428 L105,458 L125,418 L140,442 L158,408 L172,432 L188,458 L208,428 L228,452 L248,418 L268,448 L295,438 L325,413 L345,438 L375,418 L405,443 L435,413 L460,438 L488,408 L512,438 L538,418 L565,443 L595,413 L620,438 L648,418 L675,443 L705,413 L725,438 L755,418 L785,443 L815,413 L840,438 L865,418 L895,443 L925,413 L948,438 L975,418 L1005,443 L1035,413 L1058,438 L1085,418 L1115,443 L1145,413 L1168,438 L1195,418 L1225,443 L1255,413 L1278,438 L1308,418 L1338,443 L1375,418 L1405,438 L1440,418 L1440,500 Z" fill="#1a2e24"/>
     </svg>
   </div>
+  <div class="ground-fade"></div>
 </div>
 
-<div class="page">
-
-  <!-- Header -->
+<div id="page">
   <header>
-    <div class="logo-mark">
-      <!-- DataIsCool glasses logo in forest green -->
-      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="80" height="80" rx="18" fill="#111f18"/>
-        <!-- Left lens -->
-        <rect x="8" y="32" width="26" height="20" rx="6" stroke="#7bc87a" stroke-width="2.5" fill="none"/>
-        <!-- Right lens -->
-        <rect x="46" y="32" width="26" height="20" rx="6" stroke="#7bc87a" stroke-width="2.5" fill="none"/>
-        <!-- Bridge -->
-        <line x1="34" y1="42" x2="46" y2="42" stroke="#7bc87a" stroke-width="2.5"/>
-        <!-- Left arm -->
-        <line x1="8" y1="42" x2="4" y2="42" stroke="#7bc87a" stroke-width="2.5"/>
-        <!-- Right arm -->
-        <line x1="72" y1="42" x2="76" y2="42" stroke="#7bc87a" stroke-width="2.5"/>
-        <!-- Bar chart inside left lens -->
-        <rect x="13" y="46" width="4" height="4" rx="1" fill="#7bc87a" opacity="0.5"/>
-        <rect x="19" y="42" width="4" height="8" rx="1" fill="#7bc87a" opacity="0.8"/>
-        <rect x="25" y="38" width="4" height="12" rx="1" fill="#7bc87a"/>
-        <!-- Trend line inside right lens -->
-        <polyline points="51,50 57,44 63,46 69,38" stroke="#c8a84b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="69" cy="38" r="2" fill="#c8a84b"/>
+    <div class="logo-row">
+      <svg class="logo-mark" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="80" height="80" rx="18" fill="rgba(36,56,48,0.85)"/>
+        <rect x="8" y="28" width="26" height="22" rx="6" stroke="#6db870" stroke-width="2.5" fill="none"/>
+        <rect x="46" y="28" width="26" height="22" rx="6" stroke="#6db870" stroke-width="2.5" fill="none"/>
+        <line x1="34" y1="39" x2="46" y2="39" stroke="#6db870" stroke-width="2.5"/>
+        <line x1="8" y1="39" x2="3" y2="39" stroke="#6db870" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="72" y1="39" x2="77" y2="39" stroke="#6db870" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="13" y="44" width="4" height="4" rx="1" fill="#6db870" opacity="0.5"/>
+        <rect x="19" y="40" width="4" height="8" rx="1" fill="#6db870" opacity="0.8"/>
+        <rect x="25" y="36" width="4" height="12" rx="1" fill="#6db870"/>
+        <polyline points="51,48 57,42 63,44 69,35" stroke="#c8a84b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="69" cy="35" r="2.5" fill="#c8a84b"/>
       </svg>
-      <span class="logo-text">DataIsCool</span>
+      <span class="logo-name">DataIsCool</span>
     </div>
-
     <h1 class="hero-title">Your apps,<br><em>all in one place.</em></h1>
-    <p class="hero-sub">A personal hub for everything built under the DataIsCool brand. Pick an app below and get started.</p>
+    <p class="hero-sub">A personal hub for everything built under the DataIsCool name. Pick an app below and get started.</p>
   </header>
 
   <div class="divider"></div>
-
   <p class="section-label">// Apps</p>
 
-  <!-- App grid -->
   <div class="app-grid">
-
     <!-- Recipe App -->
-    <a class="app-card" href="/Recipes" target="_blank" rel="noopener">
+    <a class="app-card" href="/Recipes" style="animation-delay:0.5s;">
       <div class="card-icon">🍽️</div>
-      <div class="card-body">
+      <div>
         <div class="card-title">Our Recipes</div>
-        <div class="card-desc">A shared recipe library and weekly meal planner — with shopping lists built in.</div>
+        <div class="card-desc">A shared recipe library and weekly meal planner with shopping lists built in. For two people, synced in real time.</div>
       </div>
       <div class="card-footer">
-        <span class="card-tag live">● Live</span>
+        <span class="tag tag-live">● Live</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
 
-    <!-- Coming soon placeholder 1 -->
-    <div class="app-card coming-soon" style="animation-delay: 0.65s;">
-      <div class="card-icon" style="opacity:0.4;">📊</div>
-      <div class="card-body">
+    <!-- Coming soon 1 -->
+    <div class="app-card coming" style="animation-delay:0.6s;">
+      <div class="card-icon" style="opacity:0.35;">📊</div>
+      <div>
         <div class="card-title" style="color:var(--muted);">Next App</div>
         <div class="card-desc">Something new is being built here. Check back soon.</div>
       </div>
       <div class="card-footer">
-        <span class="card-tag soon">Coming soon</span>
+        <span class="tag tag-soon">Coming soon</span>
       </div>
     </div>
 
-    <!-- Coming soon placeholder 2 -->
-    <div class="app-card coming-soon" style="animation-delay: 0.75s;">
-      <div class="card-icon" style="opacity:0.4;">🗂️</div>
-      <div class="card-body">
+    <!-- Coming soon 2 -->
+    <div class="app-card coming" style="animation-delay:0.7s;">
+      <div class="card-icon" style="opacity:0.35;">🗂️</div>
+      <div>
         <div class="card-title" style="color:var(--muted);">Next App</div>
         <div class="card-desc">Another tool in the works. More to come as the collection grows.</div>
       </div>
       <div class="card-footer">
-        <span class="card-tag soon">Coming soon</span>
+        <span class="tag tag-soon">Coming soon</span>
       </div>
     </div>
-
   </div>
 
-  <!-- Footer -->
   <footer>
-    <span class="footer-brand">dataiscool.com</span>
-    <span class="footer-dot"></span>
-    <span class="footer-brand" style="opacity:0.5;">made with Claude</span>
+    <span class="footer-text">dataiscool.com</span>
+    <span class="footer-text" style="opacity:0.45;">made with Claude</span>
   </footer>
-
 </div>
 
 </body>
