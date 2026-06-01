@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Recipes</title>
-  <meta name="theme-color" content="#1e3028" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Our Recipes — DataIsCool</title>
+  <meta name="theme-color" content="#1f3626"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-title" content="Our Recipes"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,126 +14,140 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
-    :root{--bg:#1e3028;--bg2:#243830;--card:#2a4038;--card2:#304840;--border:#3a5848;--accent:#6db870;--gold:#c8a84b;--text:#e8f0e4;--muted:#9ab89a;--dim:#6a8a6a;--danger:#c0524a;--done:#5cb85c;}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
-    input,select,textarea,button{font-family:'Syne',sans-serif;outline:none;}
-    .world{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-    .world::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,#c8e0a8 0%,#a0c890 8%,#70a870 18%,#3a6848 35%,#243830 55%,#1a2e24 100%);}
-    .world::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 120% 40% at 50% 20%,rgba(180,220,160,0.18) 0%,transparent 70%);}
-    .mountains{position:absolute;bottom:0;left:0;width:100%;}
-    .ground-fade{position:absolute;bottom:0;left:0;right:0;height:75%;background:linear-gradient(to top,var(--bg) 0%,var(--bg) 30%,rgba(30,48,40,0.9) 55%,transparent 100%);}
-    #root{position:relative;z-index:1;}
-    ::-webkit-scrollbar{width:4px;}
-    ::-webkit-scrollbar-track{background:var(--bg);}
-    ::-webkit-scrollbar-thumb{background:#4a6858;border-radius:2px;}
-    .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(26,40,32,0.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(100,160,100,0.15);z-index:50;padding-bottom:env(safe-area-inset-bottom,0);}
-    .bottom-nav-inner{display:flex;max-width:480px;margin:0 auto;}
-    .nav-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 12px;cursor:pointer;background:none;border:none;color:var(--dim);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.15s;}
-    .nav-tab.active{color:var(--accent);}
-    .nav-tab-icon{font-size:22px;line-height:1;}
-    .top-tabs{display:flex;}
-    @media(max-width:639px){.bottom-nav{display:block;}.top-tabs{display:none;}.main-content{padding-bottom:80px!important;}}
-    @media(max-width:639px){.rgrid{grid-template-columns:1fr 1fr!important;}}
-    @media(min-width:640px){.rgrid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important;}}
-    .hcard{transition:transform 0.2s ease,box-shadow 0.2s ease;}
-    .hcard:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+    :root{
+      --f-deep:#1a2e20; --f-dark:#1f3626; --f-mid:#2a4232; --f-light:#334e3e; --f-mist:#3d5c4a; --f-edge:#4a6858;
+      --c-white:#f5f0e8; --c-light:#e8e0d0; --c-muted:#c8bca8; --c-dim:#9a8e7c; --c-faint:#6a5e4e;
+      --sage:#6db870; --sage-l:#8dd090; --amber:#c8a84b; --danger:#c0524a; --done:#5cb85c;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--f-deep);color:var(--c-light);font-family:"Syne",sans-serif;min-height:100vh;overflow-x:hidden}
+    input,select,textarea,button{font-family:"Syne",sans-serif;outline:none}
+    .world{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .world::before{content:"";position:absolute;inset:0;
+      background:linear-gradient(to bottom,#ddecc8 0%,#b8d4a0 7%,#7aaa6a 17%,#3a6040 32%,#243830 50%,#1a2e20 70%,#141f18 100%)}
+    .world::after{content:"";position:absolute;inset:0;
+      background:radial-gradient(ellipse 110% 30% at 50% 16%,rgba(220,240,180,0.25) 0%,transparent 60%),
+                  radial-gradient(ellipse 50% 18% at 75% 22%,rgba(200,168,75,0.08) 0%,transparent 50%)}
+    .mountains{position:absolute;bottom:0;left:0;width:100%}
+    .ground{position:absolute;bottom:0;left:0;right:0;height:74%;
+      background:linear-gradient(to top,var(--f-deep) 0%,var(--f-deep) 30%,rgba(26,46,32,0.95) 52%,transparent 100%)}
+    #root{position:relative;z-index:1}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-track{background:var(--f-deep)}
+    ::-webkit-scrollbar-thumb{background:var(--f-mist);border-radius:2px}
+    .bnav{display:none;position:fixed;bottom:0;left:0;right:0;
+      background:rgba(20,38,28,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+      border-top:1px solid rgba(245,240,232,0.1);z-index:50;padding-bottom:env(safe-area-inset-bottom,0)}
+    .bnav-inner{display:flex;max-width:480px;margin:0 auto}
+    .ntab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 12px;
+      cursor:pointer;background:none;border:none;color:var(--c-faint);
+      font-family:"DM Mono",monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.15s}
+    .ntab.on{color:var(--sage)}
+    .ntab-icon{font-size:22px;line-height:1}
+    .dtabs{display:flex}
+    @media(max-width:639px){.bnav{display:block}.dtabs{display:none}.wrap{padding-bottom:80px!important}}
+    @media(max-width:639px){.rgrid{grid-template-columns:1fr 1fr!important}}
+    @media(min-width:640px){.rgrid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important}}
+    .card{transition:transform 0.2s ease,box-shadow 0.2s ease;cursor:pointer}
+    .card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.45)}
   </style>
 </head>
 <body>
 <div class="world">
   <div class="mountains">
-    <svg viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;width:100%;height:auto;min-height:200px;">
-      <path d="M0,500 L0,320 L80,260 L160,295 L240,215 L320,265 L400,175 L480,225 L560,145 L640,195 L720,115 L800,165 L880,95 L960,155 L1040,75 L1120,135 L1200,155 L1280,115 L1360,175 L1440,135 L1440,500 Z" fill="#3a6040" opacity="0.5"/>
-      <path d="M0,500 L0,375 L100,315 L180,345 L260,275 L360,305 L440,245 L520,285 L600,215 L680,255 L760,195 L840,235 L920,175 L1000,215 L1080,165 L1160,205 L1260,235 L1340,195 L1440,235 L1440,500 Z" fill="#2d5035" opacity="0.65"/>
-      <path d="M0,500 L0,435 L120,385 L220,405 L320,365 L420,385 L520,345 L620,375 L720,335 L820,365 L920,325 L1040,355 L1140,325 L1260,355 L1360,335 L1440,355 L1440,500 Z" fill="#243830" opacity="0.85"/>
-      <path d="M0,500 L0,460 L40,435 L55,458 L75,415 L90,438 L110,460 L135,420 L150,445 L170,412 L188,435 L210,460 L235,428 L255,452 L278,420 L302,448 L330,435 L358,412 L378,438 L405,418 L432,443 L458,413 L480,438 L505,410 L528,438 L555,420 L580,443 L608,413 L630,438 L658,420 L682,443 L708,413 L728,438 L755,420 L782,445 L808,413 L835,438 L860,418 L888,443 L915,413 L938,438 L965,420 L990,445 L1018,413 L1042,438 L1068,418 L1095,443 L1122,413 L1145,438 L1170,418 L1198,443 L1225,413 L1248,438 L1275,418 L1302,443 L1330,418 L1358,438 L1385,420 L1410,440 L1440,420 L1440,500 Z" fill="#1a2e24"/>
+    <svg viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;width:100%;min-height:220px;">
+      <path d="M0,520 L0,310 L90,248 L170,288 L255,198 L340,258 L425,162 L515,222 L602,135 L685,195 L772,108 L855,170 L942,86 L1025,150 L1112,68 L1195,140 L1278,106 L1362,170 L1440,128 L1440,520Z" fill="#3a6040" opacity="0.45"/>
+      <path d="M0,520 L0,388 L112,322 L198,354 L278,280 L372,315 L458,248 L542,292 L628,220 L714,262 L798,198 L882,242 L968,180 L1052,225 L1138,170 L1222,218 L1312,244 L1402,200 L1440,222 L1440,520Z" fill="#2d5035" opacity="0.6"/>
+      <path d="M0,520 L0,448 L132,394 L228,415 L328,372 L430,395 L530,352 L630,380 L730,340 L830,370 L930,330 L1042,362 L1148,330 L1262,360 L1368,338 L1440,354 L1440,520Z" fill="#243830" opacity="0.8"/>
+      <path d="M0,520 L0,468 L30,448 L44,468 L60,430 L74,452 L92,422 L107,447 L122,468 L145,430 L160,452 L178,420 L195,444 L215,465 L238,432 L262,457 L285,425 L310,450 L338,437 L366,414 L388,440 L414,420 L440,445 L466,416 L490,442 L516,420 L540,445 L568,416 L592,442 L618,420 L644,446 L670,417 L692,442 L720,422 L746,447 L774,417 L798,442 L824,422 L851,447 L878,417 L901,442 L928,422 L954,447 L981,417 L1004,442 L1031,422 L1058,447 L1084,417 L1108,442 L1134,422 L1161,447 L1188,417 L1211,442 L1236,422 L1264,447 L1290,417 L1314,442 L1340,422 L1368,447 L1394,422 L1420,440 L1440,424 L1440,520Z" fill="#1a2e20"/>
     </svg>
   </div>
-  <div class="ground-fade"></div>
+  <div class="ground"></div>
 </div>
 <div id="root"></div>
-<nav class="bottom-nav" id="bottomNav"><div class="bottom-nav-inner" id="bnInner"></div></nav>
+<nav class="bnav" id="bnav"><div class="bnav-inner" id="bni"></div></nav>
 <script type="text/babel">
 const {useState,useEffect,useRef}=React;
-const SB_URL="https://tkpwseiasagnzerodiwl.supabase.co";
-const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrcHdzZWlhc2Fnbnplcm9kaXdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NzM4OTIsImV4cCI6MjA5NTE0OTg5Mn0.wWN7IXRcEmGiIisR0k9Gc4TkQT6CuLCNF7Qk8_Gl9qQ";
+const SB="https://tkpwseiasagnzerodiwl.supabase.co";
+const SK="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrcHdzZWlhc2Fnbnplcm9kaXdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NzM4OTIsImV4cCI6MjA5NTE0OTg5Mn0.wWN7IXRcEmGiIisR0k9Gc4TkQT6CuLCNF7Qk8_Gl9qQ";
 const PIN="0412";
 const CATS=["Breakfast","Lunch","Dinner","Snack","Dessert","Other"];
 const DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const MONS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-const SHOP_GROUPS={"Frozen":["frozen","ice"],"Produce":["onion","garlic","tomato","pepper","carrot","potato","lettuce","spinach","rocket","avocado","lemon","lime","cucumber","mushroom","courgette","broccoli","coriander","parsley","basil","herb","vegetable","veg","salad","spring onion","celery","leek","ginger","chilli","aubergine","corn","pea","edamame","sweetcorn","kale","cabbage"],"Meat & Fish":["chicken","beef","lamb","pork","salmon","tuna","fish","mince","steak","bacon","sausage","tofu","prawns","shrimp","turkey","duck","halloumi"],"Dairy & Eggs":["egg","milk","cream","butter","cheese","parmesan","feta","mozzarella","yogurt","yoghurt","brie","ricotta","cheddar","goat cheese","creme fraiche","mascarpone"],"Pasta & Grains":["pasta","rice","noodle","orzo","gnocchi","quinoa","couscous","bread","flour","oat","muffin","tortilla","wrap","pitta"],"Tins & Jars":["tin","can","canned","chopped tomato","stock","sauce","mayo","ketchup","mustard","vinegar","jam","honey","syrup","soy","peri peri","harissa","miso","tahini","pesto","sriracha","olives","coconut milk"],"Pantry":["oil","salt","pepper","spice","paprika","cumin","turmeric","cinnamon","sugar","cornflour","baking","seasoning","chili flakes","chilli flakes","garlic granules","smoked paprika","dried","curry","garam"]};
-function grp(ing){const l=ing.toLowerCase();for(const[g,kw]of Object.entries(SHOP_GROUPS))if(kw.some(k=>l.includes(k)))return g;return"Other";}
-function rollingDays(){const a=[];const t=new Date();t.setHours(0,0,0,0);for(let i=-7;i<=7;i++){const d=new Date(t);d.setDate(t.getDate()+i);a.push(d);}return a;}
-function dkey(d){return d.toISOString().split("T")[0];}
-function monday(d=new Date()){const c=typeof d==="string"?new Date(d+"T12:00:00"):new Date(d);const dy=c.getDay();c.setDate(c.getDate()-dy+(dy===0?-6:1));return c.toISOString().split("T")[0];}
-function today(){const d=new Date();d.setHours(0,0,0,0);return dkey(d);}
-function fmtDate(s){const d=new Date(s+"T12:00:00");return DAYS[d.getDay()].slice(0,3)+" "+d.getDate()+" "+MONS[d.getMonth()];}
-const H={"Content-Type":"application/json","apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Prefer":"return=representation"};
-async function sGet(t,q=""){try{const r=await fetch(SB_URL+"/rest/v1/"+t+"?"+q,{headers:H});if(!r.ok)throw r.status;return r.json();}catch(e){console.error(e);return[];}}
-async function sPost(t,b){try{const r=await fetch(SB_URL+"/rest/v1/"+t,{method:"POST",headers:H,body:JSON.stringify(b)});if(!r.ok)throw r.status;return r.json();}catch(e){console.error(e);return null;}}
-async function sPatch(t,q,b){try{const r=await fetch(SB_URL+"/rest/v1/"+t+"?"+q,{method:"PATCH",headers:H,body:JSON.stringify(b)});if(!r.ok)throw r.status;return r.json();}catch(e){console.error(e);return null;}}
-async function sDel(t,q){try{await fetch(SB_URL+"/rest/v1/"+t+"?"+q,{method:"DELETE",headers:H});}catch(e){console.error(e);}}
-async function sUps(t,b,oc){try{const r=await fetch(SB_URL+"/rest/v1/"+t+"?on_conflict="+oc,{method:"POST",headers:{...H,"Prefer":"resolution=merge-duplicates,return=representation"},body:JSON.stringify(b)});if(!r.ok)throw r.status;return r.json();}catch(e){return null;}}
+const SG={"Frozen":["frozen","ice"],"Produce":["onion","garlic","tomato","pepper","carrot","potato","lettuce","spinach","rocket","avocado","lemon","lime","cucumber","mushroom","courgette","broccoli","coriander","parsley","basil","herb","vegetable","veg","salad","spring onion","celery","leek","ginger","chilli","aubergine","corn","pea","edamame","sweetcorn","kale","cabbage"],"Meat & Fish":["chicken","beef","lamb","pork","salmon","tuna","fish","mince","steak","bacon","sausage","tofu","prawns","shrimp","turkey","duck","halloumi"],"Dairy & Eggs":["egg","milk","cream","butter","cheese","parmesan","feta","mozzarella","yogurt","yoghurt","brie","ricotta","cheddar","goat cheese","creme fraiche","mascarpone"],"Pasta & Grains":["pasta","rice","noodle","orzo","gnocchi","quinoa","couscous","bread","flour","oat","muffin","tortilla","wrap","pitta"],"Tins & Jars":["tin","can","canned","chopped tomato","stock","sauce","mayo","ketchup","mustard","vinegar","jam","honey","syrup","soy","peri peri","harissa","miso","tahini","pesto","sriracha","olives","coconut milk"],"Pantry":["oil","salt","pepper","spice","paprika","cumin","turmeric","cinnamon","sugar","cornflour","baking","seasoning","chili flakes","chilli flakes","garlic granules","smoked paprika","dried","curry","garam"]};
+function grp(i){const l=i.toLowerCase();for(const[g,k]of Object.entries(SG))if(k.some(x=>l.includes(x)))return g;return"Other";}
+function rDays(){const a=[];const t=new Date();t.setHours(0,0,0,0);for(let i=-7;i<=7;i++){const d=new Date(t);d.setDate(t.getDate()+i);a.push(d);}return a;}
+function dk(d){return d.toISOString().split("T")[0];}
+function mon(d=new Date()){const c=typeof d==="string"?new Date(d+"T12:00:00"):new Date(d);const dy=c.getDay();c.setDate(c.getDate()-dy+(dy===0?-6:1));return c.toISOString().split("T")[0];}
+function tdk(){const d=new Date();d.setHours(0,0,0,0);return dk(d);}
+function fd(s){const d=new Date(s+"T12:00:00");return DAYS[d.getDay()].slice(0,3)+" "+d.getDate()+" "+MONS[d.getMonth()];}
+const H={"Content-Type":"application/json","apikey":SK,"Authorization":"Bearer "+SK,"Prefer":"return=representation"};
+async function sG(t,q=""){try{const r=await fetch(SB+"/rest/v1/"+t+"?"+q,{headers:H});if(!r.ok)throw 0;return r.json();}catch{return[];}}
+async function sP(t,b){try{const r=await fetch(SB+"/rest/v1/"+t,{method:"POST",headers:H,body:JSON.stringify(b)});if(!r.ok)throw 0;return r.json();}catch{return null;}}
+async function sPa(t,q,b){try{const r=await fetch(SB+"/rest/v1/"+t+"?"+q,{method:"PATCH",headers:H,body:JSON.stringify(b)});if(!r.ok)throw 0;return r.json();}catch{return null;}}
+async function sD(t,q){try{await fetch(SB+"/rest/v1/"+t+"?"+q,{method:"DELETE",headers:H});}catch{}}
+async function sU(t,b,oc){try{const r=await fetch(SB+"/rest/v1/"+t+"?on_conflict="+oc,{method:"POST",headers:{...H,"Prefer":"resolution=merge-duplicates,return=representation"},body:JSON.stringify(b)});if(!r.ok)throw 0;return r.json();}catch{return null;}}
 
-const glass={background:"rgba(30,46,36,0.8)",backdropFilter:"blur(16px)",WebkitBackdropFilter:"blur(16px)",border:"1px solid rgba(100,160,100,0.15)",borderRadius:16};
-const glassS={background:"rgba(24,38,30,0.95)",backdropFilter:"blur(20px)",WebkitBackdropFilter:"blur(20px)",border:"1px solid rgba(100,160,100,0.18)",borderRadius:16};
-const iSt={width:"100%",background:"rgba(16,32,24,0.75)",border:"1px solid rgba(100,160,100,0.2)",borderRadius:10,color:"#e8f0e4",padding:"10px 14px",fontSize:15,fontFamily:"'Syne',sans-serif"};
-const lSt={display:"block",fontFamily:"'DM Mono',monospace",fontSize:11,letterSpacing:"0.1em",textTransform:"uppercase",color:"#9ab89a",marginBottom:6,marginTop:14};
-const bP={background:"#6db870",border:"none",borderRadius:12,color:"#1a2e20",fontSize:15,fontWeight:700,padding:"13px 0",width:"100%",cursor:"pointer",marginTop:20,fontFamily:"'Syne',sans-serif"};
-const bS={background:"rgba(30,46,36,0.8)",border:"1px solid rgba(100,160,100,0.2)",borderRadius:10,color:"#9ab89a",fontSize:13,padding:"8px 16px",cursor:"pointer",fontFamily:"'Syne',sans-serif"};
+// Brand tokens as JS
+const C={
+  fDeep:"#1a2e20",fDark:"#1f3626",fMid:"#2a4232",fLight:"#334e3e",fMist:"#3d5c4a",fEdge:"#4a6858",
+  cWhite:"#f5f0e8",cLight:"#e8e0d0",cMuted:"#c8bca8",cDim:"#9a8e7c",cFaint:"#6a5e4e",
+  sage:"#6db870",sageL:"#8dd090",amber:"#c8a84b",danger:"#c0524a",done:"#5cb85c",
+};
+// Surface helpers
+const glassBase={background:"rgba(26,46,32,0.85)",backdropFilter:"blur(16px)",WebkitBackdropFilter:"blur(16px)",border:"1px solid rgba(245,240,232,0.09)",borderRadius:16};
+const glassRaise={background:"rgba(20,38,28,0.96)",backdropFilter:"blur(20px)",WebkitBackdropFilter:"blur(20px)",border:"1px solid rgba(245,240,232,0.11)",borderRadius:16};
+const glassSink={background:"rgba(14,28,20,0.75)",border:"1px solid rgba(245,240,232,0.07)",borderRadius:10};
+// Shared style objects
+const iSt={...glassSink,width:"100%",color:C.cLight,padding:"11px 14px",fontSize:15};
+const lSt={display:"block",fontFamily:"'DM Mono',monospace",fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",color:C.cMuted,marginBottom:6,marginTop:16};
+const bPri={background:C.sage,border:"none",borderRadius:12,color:C.fDeep,fontSize:15,fontWeight:700,padding:"13px 0",width:"100%",cursor:"pointer",marginTop:20};
+const bSec={...glassBase,border:"1px solid rgba(245,240,232,0.14)",borderRadius:10,color:C.cMuted,fontSize:13,padding:"8px 16px",cursor:"pointer"};
+const sectionHead={fontFamily:"'DM Serif Display',serif",fontSize:19,color:C.cWhite,marginTop:24,marginBottom:12,borderBottom:"1px solid rgba(245,240,232,0.08)",paddingBottom:8};
 
 const TABS=[{id:"library",icon:"📚",label:"Recipes"},{id:"add",icon:"✚",label:"Add"},{id:"planner",icon:"📅",label:"Planner"},{id:"shopping",icon:"🛒",label:"Shopping"}];
 
 function Logo({size=32}){
-  return <svg width={size} height={size} viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="18" fill="rgba(30,46,36,0.9)"/><rect x="8" y="28" width="26" height="22" rx="6" stroke="#6db870" strokeWidth="2.5" fill="none"/><rect x="46" y="28" width="26" height="22" rx="6" stroke="#6db870" strokeWidth="2.5" fill="none"/><line x1="34" y1="39" x2="46" y2="39" stroke="#6db870" strokeWidth="2.5"/><line x1="8" y1="39" x2="3" y2="39" stroke="#6db870" strokeWidth="2.5" strokeLinecap="round"/><line x1="72" y1="39" x2="77" y2="39" stroke="#6db870" strokeWidth="2.5" strokeLinecap="round"/><rect x="13" y="44" width="4" height="4" rx="1" fill="#6db870" opacity="0.5"/><rect x="19" y="40" width="4" height="8" rx="1" fill="#6db870" opacity="0.8"/><rect x="25" y="36" width="4" height="12" rx="1" fill="#6db870"/><polyline points="51,48 57,42 63,44 69,35" stroke="#c8a84b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/><circle cx="69" cy="35" r="2.5" fill="#c8a84b"/></svg>;
+  return <svg width={size} height={size} viewBox="0 0 80 80" fill="none">
+    <rect width="80" height="80" rx="18" fill="rgba(26,46,32,0.9)"/>
+    <rect x="8" y="28" width="26" height="22" rx="6" stroke={C.cWhite} strokeWidth="2.5" fill="none"/>
+    <rect x="46" y="28" width="26" height="22" rx="6" stroke={C.cWhite} strokeWidth="2.5" fill="none"/>
+    <line x1="34" y1="39" x2="46" y2="39" stroke={C.cWhite} strokeWidth="2.5"/>
+    <line x1="8" y1="39" x2="3" y2="39" stroke={C.cWhite} strokeWidth="2.5" strokeLinecap="round"/>
+    <line x1="72" y1="39" x2="77" y2="39" stroke={C.cWhite} strokeWidth="2.5" strokeLinecap="round"/>
+    <rect x="13" y="44" width="4" height="4" rx="1" fill={C.sage} opacity="0.6"/>
+    <rect x="19" y="39" width="4" height="9" rx="1" fill={C.sage} opacity="0.85"/>
+    <rect x="25" y="35" width="4" height="13" rx="1" fill={C.sage}/>
+    <polyline points="51,48 57,41 63,43 69,34" stroke={C.amber} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    <circle cx="69" cy="34" r="2.5" fill={C.amber}/>
+  </svg>;
 }
 
 function App(){
-  const [pin,setPin]=useState("");
-  const [authed,setAuthed]=useState(false);
-  const [pinErr,setPinErr]=useState(false);
-  const [loading,setLoading]=useState(false);
-  const [appLoad,setAppLoad]=useState(false);
-  const [connErr,setConnErr]=useState(false);
-  const [view,setView]=useState("library");
-  const [prev,setPrev]=useState("library");
-  const [recipes,setRecipes]=useState([]);
-  const [plan,setPlan]=useState({});
-  const [sel,setSel]=useState(null);
-  const [step,setStep]=useState(0);
-  const [ticks,setTicks]=useState({});
-  const [ws]=useState(monday());
-  const [search,setSearch]=useState("");
-  const [pSearch,setPSearch]=useState("");
-  const [fCat,setFCat]=useState("All");
-  const [fFav,setFFav]=useState(false);
-  const [sort,setSort]=useState("newest");
+  const [pin,setPin]=useState("");const [authed,setAuthed]=useState(false);const [pinErr,setPinErr]=useState(false);
+  const [appLoad,setAppLoad]=useState(false);const [connErr,setConnErr]=useState(false);
+  const [view,setView]=useState("library");const [prev,setPrev]=useState("library");
+  const [recipes,setRecipes]=useState([]);const [plan,setPlan]=useState({});
+  const [sel,setSel]=useState(null);const [step,setStep]=useState(0);
+  const [ticks,setTicks]=useState({});const [ws]=useState(mon());
+  const [search,setSearch]=useState("");const [pSearch,setPSearch]=useState("");
+  const [fCat,setFCat]=useState("All");const [fFav,setFFav]=useState(false);const [sort,setSort]=useState("newest");
   const [form,setForm]=useState({title:"",category:"Dinner",source_url:"",ingredients:"",steps:"",photo_url:"",servings:2,prep_time:"",cook_time:""});
-  const [fErr,setFErr]=useState("");
-  const [editF,setEditF]=useState(null);
-  const [picker,setPicker]=useState(null);
-  const [delC,setDelC]=useState(false);
-  const [sCount,setSCount]=useState(null);
-  const [custom,setCustom]=useState([]);
-  const [newItem,setNewItem]=useState("");
-  const [toast,setToast]=useState("");
+  const [fErr,setFErr]=useState("");const [editF,setEditF]=useState(null);
+  const [picker,setPicker]=useState(null);const [delC,setDelC]=useState(false);
+  const [sCount,setSCount]=useState(null);const [custom,setCustom]=useState([]);
+  const [newItem,setNewItem]=useState("");const [toast,setToast]=useState("");
+  const [loading,setLoading]=useState(false);
   const fileRef=useRef(null);
-  const tk=today();
-  const rDays=rollingDays();
+  const tk=tdk();const days=rDays();
 
   useEffect(()=>{
-    const inner=document.getElementById("bnInner");
-    if(!inner||!authed)return;
-    inner.innerHTML="";
-    TABS.forEach(tab=>{
-      const btn=document.createElement("button");
-      btn.className="nav-tab"+(view===tab.id?" active":"");
-      btn.innerHTML='<span class="nav-tab-icon">'+tab.icon+'</span><span>'+tab.label+'</span>';
-      btn.onclick=()=>setView(tab.id);
-      inner.appendChild(btn);
-    });
+    const el=document.getElementById("bni");if(!el||!authed)return;
+    el.innerHTML="";
+    TABS.forEach(t=>{const b=document.createElement("button");b.className="ntab"+(view===t.id?" on":"");
+      b.innerHTML='<span class="ntab-icon">'+t.icon+'</span><span>'+t.label+'</span>';
+      b.onclick=()=>setView(t.id);el.appendChild(b);});
   },[view,authed]);
 
   useEffect(()=>{
@@ -139,59 +155,57 @@ function App(){
     setAppLoad(true);setConnErr(false);
     try{const s=localStorage.getItem("ci");if(s)setCustom(JSON.parse(s));localStorage.removeItem("pinRemember");}catch(e){}
     const to=setTimeout(()=>{setAppLoad(false);setConnErr(true);},10000);
-    Promise.all([fRec(),fPlan(),fTicks()]).then(()=>clearTimeout(to)).finally(()=>{clearTimeout(to);setAppLoad(false);});
+    Promise.all([fRec(),fPlan(),fTick()]).then(()=>clearTimeout(to)).finally(()=>{clearTimeout(to);setAppLoad(false);});
   },[authed]);
 
   useEffect(()=>{
-    if(pin.length===4){
-      if(pin===PIN)setAuthed(true);
-      else{setPinErr(true);setTimeout(()=>{setPinErr(false);setPin("");},800);}
-    }
+    if(pin.length===4){if(pin===PIN)setAuthed(true);
+      else{setPinErr(true);setTimeout(()=>{setPinErr(false);setPin("");},800);}}
   },[pin]);
 
   function showT(m){setToast(m);setTimeout(()=>setToast(""),2500);}
-  async function fRec(){const d=await sGet("recipes","order=created_at.desc");setRecipes(Array.isArray(d)?d:[]);}
+  async function fRec(){const d=await sG("recipes","order=created_at.desc");setRecipes(Array.isArray(d)?d:[]);}
   async function fPlan(){
-    const s=rDays[0];const e=rDays[rDays.length-1];
-    const d=await sGet("week_plan","date=gte."+dkey(s)+"&date=lte."+dkey(e)+"&select=*,recipes(*)");
+    const s=days[0];const e=days[days.length-1];
+    const d=await sG("week_plan","date=gte."+dk(s)+"&date=lte."+dk(e)+"&select=*,recipes(*)");
     const p={};(Array.isArray(d)?d:[]).forEach(r=>{if(r.date)p[r.date]=r;});setPlan(p);
   }
-  async function fTicks(){
-    const d=await sGet("shopping_ticks","week_start=eq."+ws+"&ticked=eq.true");
+  async function fTick(){
+    const d=await sG("shopping_ticks","week_start=eq."+ws+"&ticked=eq.true");
     const t={};(Array.isArray(d)?d:[]).forEach(r=>{t[r.ingredient]=true;});setTicks(t);
   }
-  async function toggleTick(ing){
+  async function togTick(ing){
     const nv=!ticks[ing];setTicks(t=>({...t,[ing]:nv}));
-    if(nv)await sUps("shopping_ticks",{week_start:ws,ingredient:ing,ticked:true},"week_start,ingredient");
-    else await sDel("shopping_ticks","week_start=eq."+ws+"&ingredient=eq."+ing.replace(/&/g,"%26").replace(/=/g,"%3D"));
+    if(nv)await sU("shopping_ticks",{week_start:ws,ingredient:ing,ticked:true},"week_start,ingredient");
+    else await sD("shopping_ticks","week_start=eq."+ws+"&ingredient=eq."+ing.replace(/&/g,"%26").replace(/=/g,"%3D"));
   }
-  async function saveRec(rec){
-    setLoading(true);const r=await sPost("recipes",rec);setLoading(false);
-    if(!r){showT("Save failed");return;}
-    showT("Saved!");fRec();setView("library");
+  async function saveRec(r){
+    setLoading(true);const res=await sP("recipes",r);setLoading(false);
+    if(!res){showT("Save failed");return;}
+    showT("Recipe saved!");fRec();setView("library");
     setForm({title:"",category:"Dinner",source_url:"",ingredients:"",steps:"",photo_url:"",servings:2,prep_time:"",cook_time:""});
     if(fileRef.current)fileRef.current.value="";
   }
-  async function saveQ(rec,cb){const r=await sPost("recipes",rec);if(r&&cb)cb();}
+  async function saveQ(r,cb){const res=await sP("recipes",r);if(res&&cb)cb();}
   async function delRec(id){
-    await sDel("week_plan","recipe_id=eq."+id);await sDel("recipes","id=eq."+id);
+    await sD("week_plan","recipe_id=eq."+id);await sD("recipes","id=eq."+id);
     showT("Removed");fRec();fPlan();setSel(null);setDelC(false);setView("library");
   }
-  async function assign(dk,rid){
-    const ex=plan[dk];
-    if(ex)await sPatch("week_plan","id=eq."+ex.id,{recipe_id:rid});
-    else await sPost("week_plan",{date:dk,recipe_id:rid,week_start:monday(dk)});
+  async function assign(d,rid){
+    const ex=plan[d];
+    if(ex)await sPa("week_plan","id=eq."+ex.id,{recipe_id:rid});
+    else await sP("week_plan",{date:d,recipe_id:rid,week_start:mon(d)});
     await fPlan();showT("Added to plan!");
   }
-  async function unassign(dk){const ex=plan[dk];if(ex){await sDel("week_plan","id=eq."+ex.id);fPlan();}}
+  async function unassign(d){const ex=plan[d];if(ex){await sD("week_plan","id=eq."+ex.id);fPlan();}}
   async function updateRec(id,u){
-    setLoading(true);await sPatch("recipes","id=eq."+id,u);setLoading(false);
+    setLoading(true);await sPa("recipes","id=eq."+id,u);setLoading(false);
     showT("Saved!");await fRec();setSel(p=>({...p,...u}));setEditF(null);
   }
-  async function toggleFav(r){
-    const nv=!r.is_favourite;await sPatch("recipes","id=eq."+r.id,{is_favourite:nv});
+  async function togFav(r){
+    const nv=!r.is_favourite;await sPa("recipes","id=eq."+r.id,{is_favourite:nv});
     setSel(p=>({...p,is_favourite:nv}));setRecipes(rs=>rs.map(x=>x.id===r.id?{...x,is_favourite:nv}:x));
-    showT(nv?"Favourited":"Removed from favourites");
+    showT(nv?"Favourited ♥":"Removed from favourites");
   }
   function handleForm(){
     if(!form.title.trim()){setFErr("Title required");return;}
@@ -201,145 +215,138 @@ function App(){
       prep_time:form.prep_time.trim()||null,cook_time:form.cook_time.trim()||null,
       is_favourite:false,rating:0,notes:null});setFErr("");
   }
-  function handleUpload(e){
+  function handleUp(e){
     const files=Array.from(e.target.files);if(!files.length)return;
-    let err=0,ok=0;const total=files.length;
-    files.forEach(file=>{
-      const rd=new FileReader();
-      rd.onload=ev=>{
-        try{
-          const d=JSON.parse(ev.target.result);if(!d.title){err++;return;}
-          saveQ({title:d.title,category:d.category||"Dinner",source_url:d.source_url||null,photo_url:d.photo_url||null,
-            ingredients:Array.isArray(d.ingredients)?d.ingredients:[],steps:Array.isArray(d.steps)?d.steps:[],
-            servings:d.servings||2,prep_time:d.prep_time||null,cook_time:d.cook_time||null,
-            is_favourite:false,rating:0,notes:null},
-          ()=>{ok++;if(ok+err===total){fRec();setView("library");showT(ok+" recipe"+(ok>1?"s":"")+" saved!");}});
-        }catch{err++;}
-      };rd.readAsText(file);
-    });e.target.value="";
+    let err=0,ok=0;const tot=files.length;
+    files.forEach(f=>{const rd=new FileReader();
+      rd.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(!d.title){err++;return;}
+        saveQ({title:d.title,category:d.category||"Dinner",source_url:d.source_url||null,photo_url:d.photo_url||null,
+          ingredients:Array.isArray(d.ingredients)?d.ingredients:[],steps:Array.isArray(d.steps)?d.steps:[],
+          servings:d.servings||2,prep_time:d.prep_time||null,cook_time:d.cook_time||null,
+          is_favourite:false,rating:0,notes:null},
+        ()=>{ok++;if(ok+err===tot){fRec();setView("library");showT(ok+" recipe"+(ok>1?"s":"")+" saved!");}});
+      }catch{err++;}};rd.readAsText(f);});e.target.value="";
   }
-  function scaleIng(ing,s){
-    if(s===1)return ing;
-    return ing.replace(/(\d+\.?\d*)/g,(m)=>{const n=parseFloat(m)*s;return Number.isInteger(n)?n:Math.round(n*10)/10;});
-  }
-  function shopGrps(){
+  function scl(ing,s){if(s===1)return ing;return ing.replace(/(\d+\.?\d*)/g,(m)=>{const n=parseFloat(m)*s;return Number.isInteger(n)?n:Math.round(n*10)/10;});}
+  function shopG(){
     const seen={};
-    Object.entries(plan).forEach(([dk,row])=>{
-      if(!row?.recipes||dk<tk)return;
-      (row.recipes.ingredients||[]).forEach(ing=>{const k=ing.trim().toLowerCase();if(!seen[k])seen[k]=ing.trim();});
-    });
-    const g={};Object.values(seen).forEach(ing=>{const gg=grp(ing);if(!g[gg])g[gg]=[];g[gg].push(ing);});
-    return g;
+    Object.entries(plan).forEach(([d,row])=>{if(!row?.recipes||d<tk)return;(row.recipes.ingredients||[]).forEach(i=>{const k=i.trim().toLowerCase();if(!seen[k])seen[k]=i.trim();});});
+    const g={};Object.values(seen).forEach(i=>{const gg=grp(i);if(!g[gg])g[gg]=[];g[gg].push(i);});return g;
   }
-  const filtered=[...recipes]
-    .filter(r=>r.title.toLowerCase().includes(search.toLowerCase())&&(fCat==="All"||r.category===fCat)&&(!fFav||r.is_favourite))
+  const filtered=[...recipes].filter(r=>r.title.toLowerCase().includes(search.toLowerCase())&&(fCat==="All"||r.category===fCat)&&(!fFav||r.is_favourite))
     .sort((a,b)=>sort==="az"?a.title.localeCompare(b.title):sort==="rating"?(b.rating||0)-(a.rating||0):0);
   const tonight=plan[tk]?.recipes;
-  const baseS=sel?.servings||2;
-  const curS=sCount!==null?sCount:baseS;
-  const sScale=curS/baseS;
+  const baseS=sel?.servings||2;const curS=sCount!==null?sCount:baseS;const sScale=curS/baseS;
 
-  // ── PIN ──────────────────────────────────────────────────────────────────
-  if(!authed) return (
+  // PIN
+  if(!authed)return(
     <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
-      <div style={{...glassS,padding:"48px 32px",maxWidth:340,width:"100%",textAlign:"center"}}>
+      <div style={{...glassRaise,padding:"48px 32px",maxWidth:340,width:"100%",textAlign:"center"}}>
         <div style={{display:"flex",justifyContent:"center",marginBottom:20}}><Logo size={56}/></div>
-        <h1 style={{fontFamily:"'DM Serif Display',serif",fontSize:32,color:"#e8f0e4",lineHeight:1.1,marginBottom:4}}>Our Recipes</h1>
-        <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:"#3a5a3a",letterSpacing:"0.16em",textTransform:"uppercase",marginBottom:4}}>by DataIsCool</p>
-        <p style={{color:"#9ab89a",fontSize:14,marginBottom:26}}>Enter your PIN to continue</p>
-        <div style={{display:"flex",gap:10,justifyContent:"center",marginBottom:26}}>
-          {[0,1,2,3].map(i=><div key={i} style={{width:14,height:14,borderRadius:"50%",background:pin.length>i?"#6db870":"rgba(80,120,80,0.25)",border:"1px solid rgba(100,160,100,0.25)",transition:"background 0.2s"}}/>)}
+        <h1 style={{fontFamily:"'DM Serif Display',serif",fontSize:32,color:C.cWhite,lineHeight:1.1,marginBottom:4}}>Our Recipes</h1>
+        <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.cFaint,letterSpacing:"0.18em",textTransform:"uppercase",marginBottom:6}}>by DataIsCool</p>
+        <p style={{color:C.cMuted,fontSize:14,marginBottom:28}}>Enter your PIN to continue</p>
+        <div style={{display:"flex",gap:12,justifyContent:"center",marginBottom:28}}>
+          {[0,1,2,3].map(i=><div key={i} style={{width:16,height:16,borderRadius:"50%",
+            background:pin.length>i?C.sage:"rgba(245,240,232,0.1)",
+            border:"1px solid "+(pin.length>i?C.sage:"rgba(245,240,232,0.2)"),transition:"background 0.2s"}}/>)}
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,maxWidth:230,margin:"0 auto 20px"}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,maxWidth:240,margin:"0 auto 20px"}}>
           {[1,2,3,4,5,6,7,8,9,"",0,"⌫"].map((k,i)=>(
-            <button key={i} style={{background:pinErr?"rgba(100,30,30,0.5)":"rgba(30,48,36,0.8)",border:"1px solid rgba(100,160,100,"+(pinErr?"0.1)":"0.12)"),borderRadius:12,color:"#e8f0e4",fontSize:22,padding:"14px 0",cursor:k===""?"default":"pointer",opacity:k===""?0:1,fontFamily:"'Syne',sans-serif",transition:"all 0.15s"}}
+            <button key={i} style={{background:pinErr?"rgba(120,40,40,0.5)":"rgba(245,240,232,0.06)",
+              border:"1px solid rgba(245,240,232,"+(pinErr?"0.08)":"0.1)"),borderRadius:12,
+              color:C.cWhite,fontSize:22,padding:"14px 0",cursor:k===""?"default":"pointer",
+              opacity:k===""?0:1,transition:"all 0.15s"}}
               onClick={()=>{if(k==="⌫")setPin(p=>p.slice(0,-1));else if(k!==""&&pin.length<4)setPin(p=>p+k);}}>
               {k}
             </button>
           ))}
         </div>
-        {pinErr&&<p style={{color:"#c87070",fontSize:13}}>Wrong PIN — try again</p>}
+        {pinErr&&<p style={{color:"#e08080",fontSize:13}}>Wrong PIN — try again</p>}
       </div>
     </div>
   );
 
-  if(connErr) return (
+  if(connErr)return(
     <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:16,padding:24,textAlign:"center"}}>
       <div style={{fontSize:48}}>🌲</div>
-      <div style={{fontFamily:"'DM Serif Display',serif",fontSize:24,color:"#e8f0e4"}}>Lost in the woods</div>
-      <div style={{color:"#9ab89a",fontSize:14}}>Check your connection and try again</div>
-      <button style={{...bP,width:"auto",padding:"12px 32px"}} onClick={()=>{setConnErr(false);setAuthed(false);setPin("");}}>Try again</button>
+      <div style={{fontFamily:"'DM Serif Display',serif",fontSize:26,color:C.cWhite}}>Lost in the woods</div>
+      <div style={{color:C.cMuted,fontSize:14}}>Check your connection and try again</div>
+      <button style={{...bPri,width:"auto",padding:"12px 32px"}} onClick={()=>{setConnErr(false);setAuthed(false);setPin("");}}>Try again</button>
     </div>
   );
 
-  if(appLoad) return (
+  if(appLoad)return(
     <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:14}}>
       <Logo size={48}/>
-      <div style={{fontFamily:"'DM Mono',monospace",color:"#9ab89a",fontSize:12,letterSpacing:"0.08em"}}>Loading your recipes...</div>
+      <div style={{fontFamily:"'DM Mono',monospace",color:C.cMuted,fontSize:12,letterSpacing:"0.1em"}}>Loading your recipes...</div>
     </div>
   );
 
-  // ── COOK ─────────────────────────────────────────────────────────────────
+  // COOK MODE
   if(view==="cook"&&sel){
     const steps=sel.steps||[];
     const prog=steps.length===0?100:Math.round(((step+1)/steps.length)*100);
-    return (
+    return(
       <div style={{minHeight:"100vh",maxWidth:680,margin:"0 auto",display:"flex",flexDirection:"column"}}>
-        <div style={{...glassS,borderRadius:0,padding:"16px 24px",display:"flex",alignItems:"center",gap:14,borderLeft:"none",borderRight:"none",borderTop:"none"}}>
-          <button style={{background:"none",border:"none",color:"#9ab89a",cursor:"pointer",fontSize:14,fontFamily:"'Syne',sans-serif"}} onClick={()=>{setView("detail");setStep(0);}}>← Back</button>
-          <span style={{fontFamily:"'DM Serif Display',serif",fontSize:20,color:"#e8f0e4",flex:1}}>{sel.title}</span>
+        <div style={{...glassRaise,borderRadius:0,padding:"16px 24px",display:"flex",alignItems:"center",gap:14,borderLeft:"none",borderRight:"none",borderTop:"none"}}>
+          <button style={{background:"none",border:"none",color:C.cMuted,cursor:"pointer",fontSize:14}} onClick={()=>{setView("detail");setStep(0);}}>← Back</button>
+          <span style={{fontFamily:"'DM Serif Display',serif",fontSize:20,color:C.cWhite,flex:1}}>{sel.title}</span>
         </div>
-        <div style={{height:3,background:"rgba(100,160,100,0.12)"}}><div style={{height:3,background:"#6db870",width:prog+"%",transition:"width 0.3s"}}/></div>
+        <div style={{height:3,background:"rgba(245,240,232,0.08)"}}>
+          <div style={{height:3,background:C.sage,width:prog+"%",transition:"width 0.3s"}}/>
+        </div>
         <div style={{flex:1,padding:"40px 24px 24px",display:"flex",flexDirection:"column"}}>
           {steps.length===0?(
             <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:12}}>
-              <div style={{color:"#9ab89a"}}>No steps yet — Edit to add them.</div>
-              <button style={bS} onClick={()=>setView("detail")}>Back to recipe</button>
+              <div style={{color:C.cMuted}}>No steps yet — Edit to add them.</div>
+              <button style={bSec} onClick={()=>setView("detail")}>Back to recipe</button>
             </div>
           ):(
             <>
-              <div style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:"#6db870",letterSpacing:"0.14em",textTransform:"uppercase",marginBottom:18}}>Step {step+1} of {steps.length}</div>
-              <div style={{fontFamily:"'DM Serif Display',serif",fontSize:28,color:"#e8f0e4",lineHeight:1.55,flex:1}}>{steps[step]}</div>
+              <div style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:C.sage,letterSpacing:"0.16em",textTransform:"uppercase",marginBottom:20}}>Step {step+1} of {steps.length}</div>
+              <div style={{fontFamily:"'DM Serif Display',serif",fontSize:28,color:C.cWhite,lineHeight:1.55,flex:1}}>{steps[step]}</div>
               <div style={{display:"flex",gap:12,marginTop:32,marginBottom:24}}>
-                <button style={{...bS,flex:1,opacity:step===0?0.3:1}} disabled={step===0} onClick={()=>setStep(s=>s-1)}>← Prev</button>
-                {step<steps.length-1?<button style={{...bS,flex:1}} onClick={()=>setStep(s=>s+1)}>Next →</button>
-                  :<button style={{background:"#5cb85c",border:"none",borderRadius:10,color:"#fff",fontSize:14,fontWeight:700,flex:1,cursor:"pointer",fontFamily:"'Syne',sans-serif"}} onClick={()=>{setView("detail");setStep(0);}}>Done ✓</button>}
+                <button style={{...bSec,flex:1,opacity:step===0?0.3:1}} disabled={step===0} onClick={()=>setStep(s=>s-1)}>← Prev</button>
+                {step<steps.length-1
+                  ?<button style={{...bSec,flex:1}} onClick={()=>setStep(s=>s+1)}>Next →</button>
+                  :<button style={{background:C.done,border:"none",borderRadius:10,color:"#fff",fontSize:14,fontWeight:700,flex:1,cursor:"pointer"}} onClick={()=>{setView("detail");setStep(0);}}>Done ✓</button>}
               </div>
             </>
           )}
-          <div style={{...glass,padding:"14px 16px"}}>
-            <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:"#9ab89a",letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:10}}>Ingredients</div>
-            {(sel.ingredients||[]).map((ing,i)=><div key={i} style={{color:"#c8e0b8",fontSize:14,marginBottom:4}}>• {ing}</div>)}
+          <div style={{...glassBase,padding:"14px 16px"}}>
+            <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.cMuted,letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:10}}>Ingredients</div>
+            {(sel.ingredients||[]).map((i,n)=><div key={n} style={{color:C.cLight,fontSize:14,marginBottom:4}}>• {i}</div>)}
           </div>
         </div>
       </div>
     );
   }
 
-  // ── DETAIL ───────────────────────────────────────────────────────────────
-  if(view==="detail"&&sel) return (
+  // DETAIL
+  if(view==="detail"&&sel)return(
     <div style={{minHeight:"100vh",maxWidth:680,margin:"0 auto",paddingBottom:40}}>
       {delC&&(
-        <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.65)",zIndex:200,display:"flex",alignItems:"flex-end",justifyContent:"center"}}>
-          <div style={{...glassS,borderRadius:"20px 20px 0 0",padding:"28px 24px 48px",width:"100%",maxWidth:680}}>
-            <div style={{fontFamily:"'DM Serif Display',serif",fontSize:24,color:"#e8f0e4",marginBottom:8}}>Remove this recipe?</div>
-            <div style={{color:"#9ab89a",fontSize:14,marginBottom:24}}>This cannot be undone.</div>
-            <button style={{...bP,marginTop:0,background:"#b85248"}} onClick={()=>delRec(sel.id)}>Yes, remove</button>
-            <button style={{...bP,marginTop:10,background:"rgba(30,48,36,0.8)"}} onClick={()=>setDelC(false)}>Cancel</button>
+        <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.7)",zIndex:200,display:"flex",alignItems:"flex-end",justifyContent:"center"}}>
+          <div style={{...glassRaise,borderRadius:"20px 20px 0 0",padding:"28px 24px 48px",width:"100%",maxWidth:680}}>
+            <div style={{fontFamily:"'DM Serif Display',serif",fontSize:24,color:C.cWhite,marginBottom:8}}>Remove this recipe?</div>
+            <div style={{color:C.cMuted,fontSize:14,marginBottom:24}}>This cannot be undone.</div>
+            <button style={{...bPri,marginTop:0,background:C.danger}} onClick={()=>delRec(sel.id)}>Yes, remove</button>
+            <button style={{...bPri,marginTop:10,background:"rgba(245,240,232,0.06)"}} onClick={()=>setDelC(false)}>Cancel</button>
           </div>
         </div>
       )}
-      <div style={{...glassS,borderRadius:0,display:"flex",justifyContent:"space-between",alignItems:"center",padding:"14px 20px",position:"sticky",top:0,zIndex:10,borderLeft:"none",borderRight:"none",borderTop:"none"}}>
-        <button style={{background:"none",border:"none",color:"#9ab89a",cursor:"pointer",fontSize:14,fontFamily:"'Syne',sans-serif"}} onClick={()=>{setView(prev==="planner"?"planner":"library");setEditF(null);setSCount(null);}}>← Back</button>
+      <div style={{...glassRaise,borderRadius:0,display:"flex",justifyContent:"space-between",alignItems:"center",padding:"14px 20px",position:"sticky",top:0,zIndex:10,borderLeft:"none",borderRight:"none",borderTop:"none"}}>
+        <button style={{background:"none",border:"none",color:C.cMuted,cursor:"pointer",fontSize:14}} onClick={()=>{setView(prev==="planner"?"planner":"library");setEditF(null);setSCount(null);}}>← Back</button>
         <div style={{display:"flex",gap:12,alignItems:"center"}}>
-          <button style={{background:"none",border:"none",fontSize:22,cursor:"pointer",color:sel.is_favourite?"#6db870":"#6a8a6a"}} onClick={()=>toggleFav(sel)}>{sel.is_favourite?"♥":"♡"}</button>
-          <button style={bS} onClick={()=>setEditF(editF?null:{title:sel.title,category:sel.category||"Dinner",source_url:sel.source_url||"",photo_url:sel.photo_url||"",ingredients:(sel.ingredients||[]).join("\n"),steps:(sel.steps||[]).join("\n"),servings:sel.servings||2,prep_time:sel.prep_time||"",cook_time:sel.cook_time||"",notes:sel.notes||"",rating:sel.rating||0})}>{editF?"Cancel":"Edit"}</button>
-          <button style={{background:"none",border:"none",color:"#b85248",cursor:"pointer",fontSize:14,fontFamily:"'Syne',sans-serif"}} onClick={()=>setDelC(true)}>Remove</button>
+          <button style={{background:"none",border:"none",fontSize:22,cursor:"pointer",color:sel.is_favourite?C.amber:C.cDim}} onClick={()=>togFav(sel)}>{sel.is_favourite?"♥":"♡"}</button>
+          <button style={{...bSec,padding:"6px 14px"}} onClick={()=>setEditF(editF?null:{title:sel.title,category:sel.category||"Dinner",source_url:sel.source_url||"",photo_url:sel.photo_url||"",ingredients:(sel.ingredients||[]).join("\n"),steps:(sel.steps||[]).join("\n"),servings:sel.servings||2,prep_time:sel.prep_time||"",cook_time:sel.cook_time||"",notes:sel.notes||"",rating:sel.rating||0})}>{editF?"Cancel":"Edit"}</button>
+          <button style={{background:"none",border:"none",color:C.danger,cursor:"pointer",fontSize:14}} onClick={()=>setDelC(true)}>Remove</button>
         </div>
       </div>
       {editF?(
         <div style={{padding:"20px 20px 80px"}}>
-          <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:28,color:"#e8f0e4",marginBottom:20}}>Edit Recipe</h2>
+          <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:28,color:C.cWhite,marginBottom:20}}>Edit Recipe</h2>
           <label style={lSt}>Title</label><input style={iSt} value={editF.title} onChange={e=>setEditF(f=>({...f,title:e.target.value}))}/>
           <label style={lSt}>Category</label>
           <select style={iSt} value={editF.category} onChange={e=>setEditF(f=>({...f,category:e.target.value}))}>
@@ -355,128 +362,143 @@ function App(){
           <label style={lSt}>Notes</label><textarea style={{...iSt,resize:"vertical"}} rows={3} value={editF.notes} onChange={e=>setEditF(f=>({...f,notes:e.target.value}))} placeholder="Add more garlic next time!"/>
           <label style={lSt}>Rating</label>
           <div style={{display:"flex",gap:6,marginTop:6}}>
-            {[1,2,3,4,5].map(n=><button key={n} onClick={()=>setEditF(f=>({...f,rating:n}))} style={{background:"none",border:"none",fontSize:28,cursor:"pointer",color:n<=editF.rating?"#c8a84b":"rgba(100,150,100,0.2)",padding:0}}>★</button>)}
+            {[1,2,3,4,5].map(n=><button key={n} onClick={()=>setEditF(f=>({...f,rating:n}))} style={{background:"none",border:"none",fontSize:28,cursor:"pointer",color:n<=editF.rating?C.amber:"rgba(245,240,232,0.12)",padding:0}}>★</button>)}
           </div>
           <label style={lSt}>Ingredients (one per line)</label><textarea style={{...iSt,resize:"vertical"}} rows={6} value={editF.ingredients} onChange={e=>setEditF(f=>({...f,ingredients:e.target.value}))}/>
           <label style={lSt}>Steps (one per line)</label><textarea style={{...iSt,resize:"vertical"}} rows={6} value={editF.steps} onChange={e=>setEditF(f=>({...f,steps:e.target.value}))}/>
-          <button style={bP} disabled={loading} onClick={()=>updateRec(sel.id,{title:editF.title.trim(),category:editF.category,source_url:editF.source_url.trim()||null,photo_url:editF.photo_url.trim()||null,ingredients:editF.ingredients.split("\n").filter(l=>l.trim()),steps:editF.steps.split("\n").filter(l=>l.trim()),servings:parseInt(editF.servings)||2,prep_time:editF.prep_time.trim()||null,cook_time:editF.cook_time.trim()||null,notes:editF.notes.trim()||null,rating:editF.rating||0})}>{loading?"Saving...":"Save Changes"}</button>
+          <button style={bPri} disabled={loading} onClick={()=>updateRec(sel.id,{title:editF.title.trim(),category:editF.category,source_url:editF.source_url.trim()||null,photo_url:editF.photo_url.trim()||null,ingredients:editF.ingredients.split("\n").filter(l=>l.trim()),steps:editF.steps.split("\n").filter(l=>l.trim()),servings:parseInt(editF.servings)||2,prep_time:editF.prep_time.trim()||null,cook_time:editF.cook_time.trim()||null,notes:editF.notes.trim()||null,rating:editF.rating||0})}>{loading?"Saving...":"Save Changes"}</button>
         </div>
       ):(
         <>
           {sel.photo_url&&<img src={sel.photo_url} alt={sel.title} style={{width:"100%",height:260,objectFit:"cover"}} loading="lazy"/>}
           <div style={{padding:"22px 20px 40px"}}>
-            <div style={{fontSize:12,color:"#9ab89a",marginBottom:8,fontFamily:"'DM Mono',monospace",letterSpacing:"0.06em"}}>{sel.category}</div>
-            <div style={{display:"flex",alignItems:"flex-start",gap:12,marginBottom:12}}>
-              <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:34,color:"#e8f0e4",lineHeight:1.1,flex:1}}>{sel.title}</h2>
-              {sel.rating>0&&<div style={{color:"#c8a84b",fontSize:18,marginTop:6,flexShrink:0}}>{"★".repeat(sel.rating)}</div>}
+            <div style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:C.cMuted,letterSpacing:"0.1em",marginBottom:10}}>{sel.category}</div>
+            <div style={{display:"flex",alignItems:"flex-start",gap:12,marginBottom:14}}>
+              <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:34,color:C.cWhite,lineHeight:1.1,flex:1}}>{sel.title}</h2>
+              {sel.rating>0&&<div style={{color:C.amber,fontSize:18,marginTop:6,flexShrink:0}}>{"★".repeat(sel.rating)}</div>}
             </div>
-            {(sel.prep_time||sel.cook_time)&&<div style={{display:"flex",gap:16,marginBottom:14,color:"#9ab89a",fontSize:13,fontFamily:"'DM Mono',monospace"}}>{sel.prep_time&&<span>⏱ {sel.prep_time}</span>}{sel.cook_time&&<span>🍳 {sel.cook_time}</span>}</div>}
-            {sel.notes&&<div style={{...glass,padding:"12px 16px",marginBottom:14,color:"#9ab89a",fontSize:14,fontStyle:"italic",lineHeight:1.5}}>💬 {sel.notes}</div>}
-            {sel.source_url&&<a href={sel.source_url} target="_blank" rel="noopener noreferrer" style={{color:"#6db870",fontSize:13,display:"block",marginBottom:14}}>View original ↗</a>}
-            <div style={{...glass,display:"flex",alignItems:"center",gap:12,padding:"12px 16px",marginBottom:4}}>
-              <span style={{fontFamily:"'DM Mono',monospace",fontSize:12,color:"#9ab89a",flex:1}}>Servings</span>
-              <button onClick={()=>setSCount(s=>Math.max(1,(s!==null?s:baseS)-1))} style={{background:"rgba(20,40,28,0.8)",border:"1px solid rgba(100,160,100,0.18)",color:"#e8f0e4",borderRadius:8,width:34,height:34,cursor:"pointer",fontSize:18}}>−</button>
-              <span style={{color:"#e8f0e4",fontSize:18,fontWeight:700,minWidth:28,textAlign:"center"}}>{curS}</span>
-              <button onClick={()=>setSCount(s=>(s!==null?s:baseS)+1)} style={{background:"rgba(20,40,28,0.8)",border:"1px solid rgba(100,160,100,0.18)",color:"#e8f0e4",borderRadius:8,width:34,height:34,cursor:"pointer",fontSize:18}}>+</button>
-              {sCount!==null&&<button onClick={()=>setSCount(null)} style={{background:"none",border:"none",color:"#6a8a6a",fontSize:12,cursor:"pointer",fontFamily:"'Syne',sans-serif"}}>Reset</button>}
+            {(sel.prep_time||sel.cook_time)&&<div style={{display:"flex",gap:16,marginBottom:14,color:C.cMuted,fontSize:13,fontFamily:"'DM Mono',monospace"}}>{sel.prep_time&&<span>⏱ {sel.prep_time}</span>}{sel.cook_time&&<span>🍳 {sel.cook_time}</span>}</div>}
+            {sel.notes&&<div style={{...glassBase,padding:"12px 16px",marginBottom:14,color:C.cLight,fontSize:14,fontStyle:"italic",lineHeight:1.55}}>💬 {sel.notes}</div>}
+            {sel.source_url&&<a href={sel.source_url} target="_blank" rel="noopener noreferrer" style={{color:C.sage,fontSize:13,display:"block",marginBottom:14}}>View original ↗</a>}
+            <div style={{...glassBase,display:"flex",alignItems:"center",gap:12,padding:"12px 16px",marginBottom:4}}>
+              <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:C.cMuted,flex:1,letterSpacing:"0.08em"}}>SERVINGS</span>
+              <button onClick={()=>setSCount(s=>Math.max(1,(s!==null?s:baseS)-1))} style={{background:"rgba(245,240,232,0.06)",border:"1px solid rgba(245,240,232,0.1)",color:C.cWhite,borderRadius:8,width:34,height:34,cursor:"pointer",fontSize:18}}>−</button>
+              <span style={{color:C.cWhite,fontSize:18,fontWeight:700,minWidth:28,textAlign:"center"}}>{curS}</span>
+              <button onClick={()=>setSCount(s=>(s!==null?s:baseS)+1)} style={{background:"rgba(245,240,232,0.06)",border:"1px solid rgba(245,240,232,0.1)",color:C.cWhite,borderRadius:8,width:34,height:34,cursor:"pointer",fontSize:18}}>+</button>
+              {sCount!==null&&<button onClick={()=>setSCount(null)} style={{background:"none",border:"none",color:C.cDim,fontSize:12,cursor:"pointer"}}>Reset</button>}
             </div>
-            <div style={{fontFamily:"'DM Serif Display',serif",fontSize:18,color:"#e8f0e4",marginTop:22,marginBottom:10,borderBottom:"1px solid rgba(100,160,100,0.1)",paddingBottom:8}}>Ingredients</div>
-            {(sel.ingredients||[]).map((ing,i)=><div key={i} style={{color:"#c8e0b8",fontSize:15,marginBottom:7,lineHeight:1.5}}>• {scaleIng(ing,sScale)}</div>)}
-            <div style={{fontFamily:"'DM Serif Display',serif",fontSize:18,color:"#e8f0e4",marginTop:22,marginBottom:10,borderBottom:"1px solid rgba(100,160,100,0.1)",paddingBottom:8}}>Steps</div>
-            {(sel.steps||[]).length===0?<div style={{color:"#9ab89a",fontSize:14,fontStyle:"italic"}}>No steps yet — tap Edit to add them.</div>
-              :(sel.steps||[]).map((s,i)=><div key={i} style={{display:"flex",gap:12,marginBottom:12,color:"#c8e0b8",fontSize:15,lineHeight:1.55}}><span style={{background:"#6db870",color:"#1a2e20",borderRadius:"50%",width:26,height:26,display:"inline-flex",alignItems:"center",justifyContent:"center",fontSize:12,flexShrink:0,marginTop:2,fontWeight:700}}>{i+1}</span>{s}</div>)}
-            <div style={{fontFamily:"'DM Serif Display',serif",fontSize:18,color:"#e8f0e4",marginTop:22,marginBottom:10,borderBottom:"1px solid rgba(100,160,100,0.1)",paddingBottom:8}}>Plan this meal</div>
+            <div style={sectionHead}>Ingredients</div>
+            {(sel.ingredients||[]).map((i,n)=><div key={n} style={{color:C.cLight,fontSize:15,marginBottom:7,lineHeight:1.5}}>• {scl(i,sScale)}</div>)}
+            <div style={sectionHead}>Steps</div>
+            {(sel.steps||[]).length===0?<div style={{color:C.cDim,fontSize:14,fontStyle:"italic"}}>No steps yet — tap Edit to add them.</div>
+              :(sel.steps||[]).map((s,i)=><div key={i} style={{display:"flex",gap:12,marginBottom:14,color:C.cLight,fontSize:15,lineHeight:1.55}}><span style={{background:C.sage,color:C.fDeep,borderRadius:"50%",width:26,height:26,display:"inline-flex",alignItems:"center",justifyContent:"center",fontSize:12,flexShrink:0,marginTop:2,fontWeight:700}}>{i+1}</span>{s}</div>)}
+            <div style={sectionHead}>Plan this meal</div>
             <div style={{display:"flex",gap:8,overflowX:"auto",paddingBottom:8,marginBottom:22}}>
-              {rDays.map(d=>{
-                const dk=dkey(d);const isT=dk===tk;const isP=plan[dk]?.recipe_id===sel.id;
-                return <div key={dk} onClick={()=>assign(dk,sel.id)} style={{flexShrink:0,textAlign:"center",cursor:"pointer",padding:"9px 11px",borderRadius:12,minWidth:52,transition:"all 0.15s",background:isP?"#6db870":isT?"rgba(109,184,112,0.12)":"rgba(30,48,36,0.6)",border:isT?"1px solid rgba(109,184,112,0.4)":"1px solid rgba(100,160,100,0.1)"}}>
-                  <div style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:isP?"#1a2e20":"#9ab89a",letterSpacing:"0.08em"}}>{DAYS[d.getDay()].slice(0,3).toUpperCase()}</div>
-                  <div style={{fontSize:16,fontWeight:700,color:isP?"#1a2e20":isT?"#6db870":"#e8f0e4",marginTop:2}}>{d.getDate()}</div>
+              {days.map(d=>{
+                const k=dk(d);const isT=k===tk;const isP=plan[k]?.recipe_id===sel.id;
+                return <div key={k} onClick={()=>assign(k,sel.id)} style={{flexShrink:0,textAlign:"center",cursor:"pointer",padding:"10px 12px",borderRadius:12,minWidth:54,transition:"all 0.15s",
+                  background:isP?C.sage:isT?"rgba(109,184,112,0.12)":"rgba(245,240,232,0.05)",
+                  border:isT?"1px solid rgba(109,184,112,0.4)":"1px solid rgba(245,240,232,0.08)"}}>
+                  <div style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:isP?C.fDeep:C.cMuted,letterSpacing:"0.08em"}}>{DAYS[d.getDay()].slice(0,3).toUpperCase()}</div>
+                  <div style={{fontSize:17,fontWeight:700,color:isP?C.fDeep:isT?C.sage:C.cWhite,marginTop:2}}>{d.getDate()}</div>
                 </div>;
               })}
             </div>
-            <button style={{...bP,fontSize:16}} onClick={()=>{setStep(0);setView("cook");}}>🍳 Start Cooking</button>
+            <button style={{...bPri,fontSize:16}} onClick={()=>{setStep(0);setView("cook");}}>🍳 Start Cooking</button>
           </div>
         </>
       )}
     </div>
   );
 
-  // ── MAIN ─────────────────────────────────────────────────────────────────
-  return (
+  // MAIN APP
+  return(
     <div style={{minHeight:"100vh",display:"flex",flexDirection:"column"}}>
-      {toast&&<div style={{position:"fixed",top:20,left:"50%",transform:"translateX(-50%)",background:"rgba(24,38,30,0.97)",backdropFilter:"blur(12px)",border:"1px solid rgba(109,184,112,0.25)",color:"#e8f0e4",padding:"10px 22px",borderRadius:20,fontSize:14,zIndex:200,whiteSpace:"nowrap",fontWeight:600,fontFamily:"'Syne',sans-serif",boxShadow:"0 4px 20px rgba(0,0,0,0.4)"}}>{toast}</div>}
+      {toast&&<div style={{position:"fixed",top:20,left:"50%",transform:"translateX(-50%)",
+        background:"rgba(20,38,28,0.98)",backdropFilter:"blur(12px)",
+        border:"1px solid rgba(245,240,232,0.14)",color:C.cWhite,
+        padding:"10px 22px",borderRadius:20,fontSize:14,zIndex:200,whiteSpace:"nowrap",
+        fontWeight:600,boxShadow:"0 4px 20px rgba(0,0,0,0.5)"}}>{toast}</div>}
 
-      <div style={{...glassS,borderRadius:0,padding:"14px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:10,borderLeft:"none",borderRight:"none",borderTop:"none"}}>
+      <div style={{...glassRaise,borderRadius:0,padding:"14px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:10,borderLeft:"none",borderRight:"none",borderTop:"none"}}>
         <div style={{display:"flex",alignItems:"center",gap:12}}>
           <Logo size={32}/>
-          <span style={{fontFamily:"'DM Serif Display',serif",fontSize:20,color:"#e8f0e4"}}>Our Recipes</span>
+          <span style={{fontFamily:"'DM Serif Display',serif",fontSize:20,color:C.cWhite}}>Our Recipes</span>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:8}}>
-          <div className="top-tabs" style={{gap:2}}>
-            {TABS.map(tab=>(
-              <button key={tab.id} onClick={()=>setView(tab.id)} style={{background:"none",border:"none",padding:"8px 14px",cursor:"pointer",fontFamily:"'DM Mono',monospace",fontSize:11,letterSpacing:"0.1em",textTransform:"uppercase",color:view===tab.id?"#6db870":"#6a8a6a",borderBottom:view===tab.id?"2px solid #6db870":"2px solid transparent",transition:"all 0.15s"}}>
-                {tab.icon} {tab.label}
+        <div style={{display:"flex",alignItems:"center",gap:6}}>
+          <div className="dtabs" style={{gap:2}}>
+            {TABS.map(t=>(
+              <button key={t.id} onClick={()=>setView(t.id)} style={{background:"none",border:"none",padding:"8px 12px",cursor:"pointer",
+                fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",
+                color:view===t.id?C.sage:C.cFaint,
+                borderBottom:view===t.id?"2px solid "+C.sage:"2px solid transparent",transition:"all 0.15s"}}>
+                {t.icon} {t.label}
               </button>
             ))}
           </div>
-          <a href="/" style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:"#3a5a3a",textDecoration:"none",letterSpacing:"0.08em",whiteSpace:"nowrap",marginLeft:8}}>← Hub</a>
+          <a href="/" style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.cFaint,textDecoration:"none",letterSpacing:"0.08em",marginLeft:8,whiteSpace:"nowrap"}}>← Hub</a>
         </div>
       </div>
 
-      <div className="main-content" style={{flex:1,maxWidth:860,margin:"0 auto",width:"100%",padding:"24px 20px 40px"}}>
+      <div className="wrap" style={{flex:1,maxWidth:860,margin:"0 auto",width:"100%",padding:"24px 20px 40px"}}>
 
         {view==="library"&&(
           <div>
             {tonight?(
               <div onClick={()=>{setSel(tonight);setPrev("library");setSCount(null);setView("detail");}}
-                style={{...glass,padding:"16px 18px",marginBottom:20,cursor:"pointer",display:"flex",alignItems:"center",gap:14,borderColor:"rgba(109,184,112,0.3)"}} className="hcard">
+                style={{...glassBase,padding:"16px 18px",marginBottom:20,cursor:"pointer",display:"flex",alignItems:"center",gap:14,
+                  border:"1px solid rgba(109,184,112,0.3)",background:"rgba(26,46,32,0.9)"}} className="card">
                 {tonight.photo_url?<img src={tonight.photo_url} alt="" style={{width:54,height:54,borderRadius:10,objectFit:"cover",flexShrink:0}} loading="lazy"/>
-                  :<div style={{width:54,height:54,borderRadius:10,background:"rgba(20,40,28,0.6)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>🍴</div>}
+                  :<div style={{width:54,height:54,borderRadius:10,background:"rgba(245,240,232,0.05)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>🍴</div>}
                 <div style={{flex:1}}>
-                  <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:"#6db870",letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:4}}>● Tonight's dinner</div>
-                  <div style={{fontFamily:"'DM Serif Display',serif",fontSize:20,color:"#e8f0e4"}}>{tonight.title}</div>
+                  <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.sage,letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:4}}>● Tonight's dinner</div>
+                  <div style={{fontFamily:"'DM Serif Display',serif",fontSize:20,color:C.cWhite}}>{tonight.title}</div>
                 </div>
-                <div style={{color:"#9ab89a",fontSize:20}}>→</div>
+                <div style={{color:C.cMuted,fontSize:20}}>→</div>
               </div>
             ):(
-              <div onClick={()=>setView("planner")} style={{...glass,padding:"16px 18px",marginBottom:20,cursor:"pointer",display:"flex",alignItems:"center",gap:12}} className="hcard">
-                <span style={{fontSize:24}}>📅</span>
-                <span style={{color:"#9ab89a",fontSize:15}}>Nothing planned for tonight — tap to add</span>
+              <div onClick={()=>setView("planner")} style={{...glassBase,padding:"16px 18px",marginBottom:20,cursor:"pointer",display:"flex",alignItems:"center",gap:14}} className="card">
+                <span style={{fontSize:26}}>📅</span>
+                <span style={{color:C.cMuted,fontSize:14}}>Nothing planned for tonight — tap to add</span>
               </div>
             )}
+
             <div style={{display:"flex",gap:10,marginBottom:14}}>
               <input style={{...iSt,flex:1}} placeholder="Search recipes..." value={search} onChange={e=>setSearch(e.target.value)}/>
-              <select value={sort} onChange={e=>setSort(e.target.value)} style={{...iSt,width:"auto",flex:"none",padding:"10px 10px"}}>
-                <option value="newest">Newest</option>
-                <option value="az">A–Z</option>
-                <option value="rating">Rating</option>
+              <select value={sort} onChange={e=>setSort(e.target.value)} style={{...iSt,width:"auto",flex:"none",padding:"10px 10px",color:C.cMuted}}>
+                <option value="newest">Newest</option><option value="az">A–Z</option><option value="rating">Rating</option>
               </select>
             </div>
+
             <div style={{display:"flex",gap:8,overflowX:"auto",paddingBottom:8,marginBottom:18}}>
               {[{id:"fav",label:"♥ Faves",on:fFav},...["All",...CATS].map(c=>({id:c,label:c,on:fCat===c&&!fFav}))].map(f=>(
                 <button key={f.id} onClick={()=>{if(f.id==="fav"){setFFav(v=>!v);setFCat("All");}else{setFCat(f.id);setFFav(false);}}}
-                  style={{background:f.on?"rgba(109,184,112,0.12)":"rgba(24,40,30,0.7)",border:f.on?"1px solid rgba(109,184,112,0.3)":"1px solid rgba(100,160,100,0.1)",borderRadius:20,padding:"7px 16px",fontSize:13,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0,color:f.on?"#6db870":"#9ab89a",fontFamily:"'Syne',sans-serif",transition:"all 0.15s"}}>
+                  style={{background:f.on?"rgba(109,184,112,0.15)":"rgba(245,240,232,0.05)",
+                    border:f.on?"1px solid rgba(109,184,112,0.35)":"1px solid rgba(245,240,232,0.1)",
+                    borderRadius:20,padding:"7px 16px",fontSize:13,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0,
+                    color:f.on?C.sage:C.cMuted,transition:"all 0.15s"}}>
                   {f.label}
                 </button>
               ))}
             </div>
-            {filtered.length===0&&<div style={{textAlign:"center",marginTop:60,color:"#9ab89a",fontSize:15}}>{recipes.length===0?"No recipes yet — add your first one!":"Nothing matches."}</div>}
+
+            {filtered.length===0&&<div style={{textAlign:"center",marginTop:60,color:C.cMuted,fontSize:15}}>{recipes.length===0?"No recipes yet — add your first one!":"Nothing matches."}</div>}
+
             <div className="rgrid" style={{display:"grid",gap:16}}>
               {filtered.map(r=>{
                 const up=Object.entries(plan).filter(([k,v])=>v?.recipe_id===r.id&&k>=tk).map(([k])=>k);
-                return (
-                  <div key={r.id} style={{...glass,overflow:"hidden",position:"relative"}} className="hcard"
+                return(
+                  <div key={r.id} style={{...glassBase,overflow:"hidden",position:"relative"}} className="card"
                     onClick={()=>{setSel(r);setPrev("library");setSCount(null);setView("detail");}}>
-                    {r.is_favourite&&<div style={{position:"absolute",top:8,right:10,fontSize:15,color:"#6db870",zIndex:1,textShadow:"0 1px 6px rgba(0,0,0,0.6)"}}>♥</div>}
+                    {r.is_favourite&&<div style={{position:"absolute",top:8,right:10,fontSize:15,color:C.amber,zIndex:1,textShadow:"0 1px 6px rgba(0,0,0,0.7)"}}>♥</div>}
                     {r.photo_url?<img src={r.photo_url} alt={r.title} style={{width:"100%",height:140,objectFit:"cover"}} loading="lazy"/>
-                      :<div style={{width:"100%",height:140,background:"rgba(16,34,24,0.7)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:44}}>🍴</div>}
+                      :<div style={{width:"100%",height:140,background:"rgba(245,240,232,0.03)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:44}}>🍴</div>}
                     <div style={{padding:"12px 14px 14px"}}>
-                      <div style={{fontSize:11,color:"#9ab89a",marginBottom:6,fontFamily:"'DM Mono',monospace",letterSpacing:"0.05em"}}>{r.category}</div>
-                      <div style={{fontFamily:"'DM Serif Display',serif",fontSize:18,color:"#e8f0e4",lineHeight:1.25,marginBottom:5}}>{r.title}</div>
-                      {(r.prep_time||r.cook_time)&&<div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:"#6a8a6a",marginBottom:4}}>{[r.prep_time&&"⏱ "+r.prep_time,r.cook_time&&"🍳 "+r.cook_time].filter(Boolean).join("  ·  ")}</div>}
-                      {up.length>0&&<div style={{fontSize:11,color:"#6db870",marginTop:3}}>📅 {up.length>1?up.length+" days planned":fmtDate(up[0])}</div>}
-                      {r.rating>0&&<div style={{color:"#c8a84b",fontSize:11,marginTop:3}}>{"★".repeat(r.rating)}</div>}
+                      <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.cMuted,letterSpacing:"0.08em",marginBottom:6}}>{r.category}</div>
+                      <div style={{fontFamily:"'DM Serif Display',serif",fontSize:18,color:C.cWhite,lineHeight:1.25,marginBottom:5}}>{r.title}</div>
+                      {(r.prep_time||r.cook_time)&&<div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.cDim,marginBottom:4}}>{[r.prep_time&&"⏱ "+r.prep_time,r.cook_time&&"🍳 "+r.cook_time].filter(Boolean).join("  ·  ")}</div>}
+                      {up.length>0&&<div style={{fontSize:11,color:C.sage,marginTop:3}}>📅 {up.length>1?up.length+" days planned":fd(up[0])}</div>}
+                      {r.rating>0&&<div style={{color:C.amber,fontSize:11,marginTop:3}}>{"★".repeat(r.rating)}</div>}
                     </div>
                   </div>
                 );
@@ -487,21 +509,20 @@ function App(){
 
         {view==="add"&&(
           <div style={{maxWidth:540}}>
-            <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:32,color:"#e8f0e4",marginBottom:8}}>Add a Recipe</h2>
-            <p style={{color:"#9ab89a",fontSize:14,marginBottom:22,lineHeight:1.6}}>Upload a JSON file from Claude, or fill in the form below.</p>
-            <div style={{...glass,padding:20,marginBottom:20,textAlign:"center"}}>
+            <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:32,color:C.cWhite,marginBottom:8}}>Add a Recipe</h2>
+            <p style={{color:C.cMuted,fontSize:14,marginBottom:22,lineHeight:1.6}}>Upload a JSON from Claude, or fill in the form.</p>
+            <div style={{...glassBase,padding:20,marginBottom:20,textAlign:"center"}}>
               <div style={{fontSize:26,marginBottom:8}}>📎</div>
-              <div style={{fontFamily:"'DM Serif Display',serif",fontSize:18,color:"#e8f0e4",marginBottom:6}}>Upload from Claude</div>
-              <div style={{color:"#9ab89a",fontSize:13,marginBottom:14,lineHeight:1.5}}>Paste a recipe link in this Claude chat, download the JSON, then upload here. Select multiple files at once.</div>
-              <label style={{...bP,display:"inline-block",width:"auto",padding:"11px 28px",marginTop:0,cursor:"pointer"}}>
+              <div style={{fontFamily:"'DM Serif Display',serif",fontSize:18,color:C.cWhite,marginBottom:6}}>Upload from Claude</div>
+              <div style={{color:C.cMuted,fontSize:13,marginBottom:14,lineHeight:1.5}}>Paste a recipe link in Claude, download the JSON, upload here. Select multiple files at once.</div>
+              <label style={{...bPri,display:"inline-block",width:"auto",padding:"11px 28px",marginTop:0,cursor:"pointer"}}>
                 Choose files
-                <input ref={fileRef} type="file" accept=".json" multiple style={{display:"none"}} onChange={handleUpload}/>
+                <input ref={fileRef} type="file" accept=".json" multiple style={{display:"none"}} onChange={handleUp}/>
               </label>
             </div>
-            <div style={{display:"flex",alignItems:"center",gap:12,margin:"20px 0",color:"#6a8a6a",fontSize:13}}>
-              <div style={{flex:1,height:1,background:"rgba(100,160,100,0.1)"}}/>
-              or fill in manually
-              <div style={{flex:1,height:1,background:"rgba(100,160,100,0.1)"}}/>
+            <div style={{display:"flex",alignItems:"center",gap:12,margin:"20px 0",color:C.cFaint,fontSize:13}}>
+              <div style={{flex:1,height:1,background:"rgba(245,240,232,0.08)"}}/>or fill in manually
+              <div style={{flex:1,height:1,background:"rgba(245,240,232,0.08)"}}/>
             </div>
             <label style={lSt}>Title *</label><input style={iSt} value={form.title} onChange={e=>setForm(f=>({...f,title:e.target.value}))} placeholder="e.g. Pasta Carbonara"/>
             <label style={lSt}>Category</label>
@@ -519,39 +540,47 @@ function App(){
             <textarea style={{...iSt,resize:"vertical"}} value={form.ingredients} onChange={e=>setForm(f=>({...f,ingredients:e.target.value}))} placeholder={"200g pasta\n2 eggs\n100g pancetta"} rows={5}/>
             <label style={lSt}>Steps (one per line)</label>
             <textarea style={{...iSt,resize:"vertical"}} value={form.steps} onChange={e=>setForm(f=>({...f,steps:e.target.value}))} placeholder={"Boil pasta\nFry pancetta\nMix eggs"} rows={5}/>
-            {fErr&&<div style={{color:"#c87070",marginBottom:8,fontSize:14}}>{fErr}</div>}
-            <button style={bP} onClick={handleForm} disabled={loading}>{loading?"Saving...":"Save Recipe"}</button>
+            {fErr&&<div style={{color:"#e08080",marginBottom:8,fontSize:14}}>{fErr}</div>}
+            <button style={bPri} onClick={handleForm} disabled={loading}>{loading?"Saving...":"Save Recipe"}</button>
           </div>
         )}
 
         {view==="planner"&&(
           <div>
-            <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:32,color:"#e8f0e4",marginBottom:22}}>Meal Planner</h2>
+            <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:32,color:C.cWhite,marginBottom:22}}>Meal Planner</h2>
             <div style={{display:"flex",flexDirection:"column",gap:10}}>
-              {rDays.map(d=>{
-                const dk=dkey(d);const row=plan[dk];const rec=row?.recipes;
-                const isT=dk===tk;const isP=dk<tk;
-                return (
-                  <div key={dk} style={{...glass,padding:"14px 16px",display:"flex",alignItems:"center",gap:12,opacity:isP?0.45:1,...(isT?{background:"rgba(109,184,112,0.08)",borderColor:"rgba(109,184,112,0.28)"}:{})}}>
-                    <div style={{width:62,flexShrink:0}}>
-                      <div style={{fontFamily:"'DM Mono',monospace",fontSize:11,fontWeight:700,color:isT?"#6db870":"#9ab89a",letterSpacing:"0.07em"}}>{DAYS[d.getDay()].slice(0,3).toUpperCase()}{isT&&<span style={{display:"block",fontSize:8,color:"#6db870"}}>TODAY</span>}</div>
-                      <div style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:"#6a8a6a"}}>{d.getDate()} {MONS[d.getMonth()]}</div>
+              {days.map(d=>{
+                const k=dk(d);const row=plan[k];const rec=row?.recipes;
+                const isT=k===tk;const isP=k<tk;
+                return(
+                  <div key={k} style={{...glassBase,padding:"14px 16px",display:"flex",alignItems:"center",gap:12,
+                    opacity:isP?0.35:1,
+                    ...(isT?{background:"rgba(109,184,112,0.1)",border:"1px solid rgba(109,184,112,0.35)"}:{})}}>
+                    <div style={{width:64,flexShrink:0}}>
+                      <div style={{fontFamily:"'DM Mono',monospace",fontSize:11,fontWeight:700,
+                        color:isT?C.sage:isP?C.cFaint:C.cMuted,letterSpacing:"0.08em"}}>
+                        {DAYS[d.getDay()].slice(0,3).toUpperCase()}
+                        {isT&&<span style={{display:"block",fontSize:8,color:C.sage,letterSpacing:"0.06em"}}>TODAY</span>}
+                        {isP&&<span style={{display:"block",fontSize:8,color:C.cFaint,letterSpacing:"0.06em"}}>PAST</span>}
+                      </div>
+                      <div style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:isP?C.cFaint:C.cDim}}>{d.getDate()} {MONS[d.getMonth()]}</div>
                     </div>
                     {rec?(
                       <div style={{flex:1,display:"flex",alignItems:"center",gap:10}}>
                         {rec.photo_url?<img src={rec.photo_url} alt="" style={{width:44,height:44,borderRadius:8,objectFit:"cover",flexShrink:0}} loading="lazy"/>
-                          :<div style={{width:44,height:44,borderRadius:8,background:"rgba(20,40,28,0.7)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>🍴</div>}
+                          :<div style={{width:44,height:44,borderRadius:8,background:"rgba(245,240,232,0.05)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>🍴</div>}
                         <div style={{flex:1,minWidth:0}}>
-                          <div style={{color:"#e8f0e4",fontSize:14,cursor:"pointer",fontFamily:"'DM Serif Display',serif",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}
-                            onClick={()=>{setSel(rec);setPrev("planner");setSCount(null);setView("detail");}}>{rec.title}</div>
-                          {isT&&<div onClick={()=>{showT("Logged! 🍳");}} style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:"#5cb85c",cursor:"pointer",marginTop:3,letterSpacing:"0.05em"}}>✓ Mark as cooked</div>}
+                          <div style={{color:isP?C.cDim:C.cWhite,fontSize:14,cursor:isP?"default":"pointer",fontFamily:"'DM Serif Display',serif",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}
+                            onClick={()=>{if(!isP){setSel(rec);setPrev("planner");setSCount(null);setView("detail");}}}>{rec.title}</div>
+                          {isT&&<div onClick={()=>showT("Logged! 🍳")} style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.done,cursor:"pointer",marginTop:3,letterSpacing:"0.06em"}}>✓ Mark as cooked</div>}
                         </div>
-                        {!isP&&<button onClick={()=>unassign(dk)} style={{background:"none",border:"none",color:"#6a8a6a",fontSize:16,cursor:"pointer",padding:"6px",flexShrink:0}}>✕</button>}
+                        {!isP&&<button onClick={()=>unassign(k)} style={{background:"none",border:"none",color:C.cDim,fontSize:16,cursor:"pointer",padding:"6px",flexShrink:0}}>✕</button>}
                       </div>
                     ):!isP&&(
-                      <button onClick={()=>{setPicker(dk);setPSearch("");}}
-                        style={{background:"rgba(20,38,28,0.6)",border:"1px dashed rgba(109,184,112,0.22)",borderRadius:10,color:"#6a8a6a",fontSize:14,padding:"10px 18px",cursor:"pointer",display:"flex",alignItems:"center",gap:8,fontFamily:"'Syne',sans-serif",transition:"all 0.15s"}}>
-                        <span style={{color:"#6db870",fontSize:18}}>+</span> Add dinner
+                      <button onClick={()=>{setPicker(k);setPSearch("");}}
+                        style={{background:"rgba(245,240,232,0.04)",border:"1px dashed rgba(245,240,232,0.12)",borderRadius:10,
+                          color:C.cDim,fontSize:14,padding:"10px 18px",cursor:"pointer",display:"flex",alignItems:"center",gap:8,transition:"all 0.15s"}}>
+                        <span style={{color:C.sage,fontSize:18}}>+</span> Add dinner
                       </button>
                     )}
                   </div>
@@ -559,13 +588,13 @@ function App(){
               })}
             </div>
             {picker&&(
-              <div style={{position:"fixed",inset:0,background:"rgba(18,32,24,0.97)",backdropFilter:"blur(20px)",zIndex:50,display:"flex",flexDirection:"column"}}>
-                <div style={{...glassS,borderRadius:0,padding:"16px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0,borderLeft:"none",borderRight:"none",borderTop:"none"}}>
+              <div style={{position:"fixed",inset:0,background:"rgba(14,24,18,0.98)",backdropFilter:"blur(20px)",zIndex:50,display:"flex",flexDirection:"column"}}>
+                <div style={{...glassRaise,borderRadius:0,padding:"16px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0,borderLeft:"none",borderRight:"none",borderTop:"none"}}>
                   <div>
-                    <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:"#9ab89a",letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:2}}>Choose for</div>
-                    <div style={{fontFamily:"'DM Serif Display',serif",fontSize:20,color:"#e8f0e4"}}>{DAYS[new Date(picker+"T12:00:00").getDay()]} {new Date(picker+"T12:00:00").getDate()} {MONS[new Date(picker+"T12:00:00").getMonth()]}</div>
+                    <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.cMuted,letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:2}}>Choose for</div>
+                    <div style={{fontFamily:"'DM Serif Display',serif",fontSize:20,color:C.cWhite}}>{DAYS[new Date(picker+"T12:00:00").getDay()]} {new Date(picker+"T12:00:00").getDate()} {MONS[new Date(picker+"T12:00:00").getMonth()]}</div>
                   </div>
-                  <button onClick={()=>setPicker(null)} style={{background:"rgba(30,46,36,0.8)",border:"1px solid rgba(100,160,100,0.15)",borderRadius:10,color:"#9ab89a",fontSize:20,cursor:"pointer",width:40,height:40,display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
+                  <button onClick={()=>setPicker(null)} style={{...glassBase,borderRadius:10,color:C.cMuted,fontSize:20,cursor:"pointer",width:40,height:40,display:"flex",alignItems:"center",justifyContent:"center",padding:0}}>✕</button>
                 </div>
                 <div style={{padding:"14px 24px 8px",flexShrink:0}}>
                   <input style={iSt} placeholder="Search recipes..." value={pSearch} onChange={e=>setPSearch(e.target.value)} autoFocus/>
@@ -573,12 +602,12 @@ function App(){
                 <div style={{overflowY:"auto",flex:1,padding:"8px 24px 24px"}}>
                   <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(160px,1fr))",gap:14}}>
                     {recipes.filter(r=>r.title.toLowerCase().includes(pSearch.toLowerCase())).map(r=>(
-                      <div key={r.id} onClick={()=>{assign(picker,r.id);setPicker(null);}} style={{...glass,overflow:"hidden",cursor:"pointer"}} className="hcard">
+                      <div key={r.id} onClick={()=>{assign(picker,r.id);setPicker(null);}} style={{...glassBase,overflow:"hidden",cursor:"pointer"}} className="card">
                         {r.photo_url?<img src={r.photo_url} alt="" style={{width:"100%",height:110,objectFit:"cover"}} loading="lazy"/>
-                          :<div style={{width:"100%",height:110,background:"rgba(16,34,24,0.7)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:34}}>🍴</div>}
+                          :<div style={{width:"100%",height:110,background:"rgba(245,240,232,0.03)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:34}}>🍴</div>}
                         <div style={{padding:"10px 12px 12px"}}>
-                          <div style={{fontSize:10,color:"#9ab89a",marginBottom:4,fontFamily:"'DM Mono',monospace"}}>{r.category}</div>
-                          <div style={{fontFamily:"'DM Serif Display',serif",fontSize:15,color:"#e8f0e4",lineHeight:1.3}}>{r.title}</div>
+                          <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.cMuted,marginBottom:4}}>{r.category}</div>
+                          <div style={{fontFamily:"'DM Serif Display',serif",fontSize:15,color:C.cWhite,lineHeight:1.3}}>{r.title}</div>
                         </div>
                       </div>
                     ))}
@@ -593,61 +622,58 @@ function App(){
           <div>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",marginBottom:22}}>
               <div>
-                <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:32,color:"#e8f0e4"}}>Shopping List</h2>
-                <p style={{color:"#9ab89a",fontSize:13,marginTop:4}}>Synced for both of you · resets each week</p>
+                <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:32,color:C.cWhite}}>Shopping List</h2>
+                <p style={{color:C.cMuted,fontSize:13,marginTop:4}}>Synced for both of you · resets each week</p>
               </div>
               {Object.keys(ticks).length>0&&(
-                <button onClick={async()=>{await sDel("shopping_ticks","week_start=eq."+ws);setTicks({});setCustom([]);try{localStorage.removeItem("ci");}catch(e){}showT("Cleared!");}} style={bS}>Clear all</button>
+                <button onClick={async()=>{await sD("shopping_ticks","week_start=eq."+ws);setTicks({});setCustom([]);try{localStorage.removeItem("ci");}catch(e){}showT("Cleared!");}} style={bSec}>Clear all</button>
               )}
             </div>
             {(()=>{
-              const gs=shopGrps();
-              const all=[...Object.keys(SHOP_GROUPS),"Other"].filter(g=>gs[g]?.length>0);
-              const hasItems=all.length>0||custom.length>0;
-              if(!hasItems) return (
+              const gs=shopG();
+              const all=[...Object.keys(SG),"Other"].filter(g=>gs[g]?.length>0);
+              if(all.length===0&&custom.length===0)return(
                 <div style={{textAlign:"center",marginTop:60}}>
                   <div style={{fontSize:52,marginBottom:14}}>🛒</div>
-                  <div style={{fontFamily:"'DM Serif Display',serif",fontSize:22,color:"#e8f0e4",marginBottom:8}}>Your list is empty</div>
-                  <div style={{color:"#9ab89a",fontSize:14,marginBottom:22}}>Plan your week and it fills up automatically</div>
-                  <button onClick={()=>setView("planner")} style={{...bP,width:"auto",padding:"12px 32px"}}>Go to planner</button>
+                  <div style={{fontFamily:"'DM Serif Display',serif",fontSize:22,color:C.cWhite,marginBottom:8}}>Your list is empty</div>
+                  <div style={{color:C.cMuted,fontSize:14,marginBottom:22}}>Plan your week and it fills up automatically</div>
+                  <button onClick={()=>setView("planner")} style={{...bPri,width:"auto",padding:"12px 32px"}}>Go to planner</button>
                 </div>
               );
-              return (
+              return(
                 <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(250px,1fr))",gap:16}}>
                   {all.map(g=>{
-                    const ings=gs[g];
-                    const ut=ings.filter(i=>!ticks[i]);
-                    const tk2=ings.filter(i=>ticks[i]);
-                    return (
-                      <div key={g} style={{...glass,padding:"16px 18px"}}>
-                        <div style={{fontFamily:"'DM Serif Display',serif",fontSize:17,color:"#e8f0e4",marginBottom:12,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                    const ings=gs[g];const ut=ings.filter(i=>!ticks[i]);const tk2=ings.filter(i=>ticks[i]);
+                    return(
+                      <div key={g} style={{...glassBase,padding:"16px 18px"}}>
+                        <div style={{fontFamily:"'DM Serif Display',serif",fontSize:17,color:C.cWhite,marginBottom:12,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                           {g}
-                          {tk2.length>0&&<span style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:"#6a8a6a"}}>{tk2.length}/{ings.length}</span>}
+                          {tk2.length>0&&<span style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:C.cDim}}>{tk2.length}/{ings.length}</span>}
                         </div>
                         {ut.map((ing,i)=>(
-                          <div key={i} style={{display:"flex",alignItems:"center",gap:12,padding:"9px 0",borderBottom:"1px solid rgba(100,160,100,0.07)",cursor:"pointer"}} onClick={()=>toggleTick(ing)}>
-                            <div style={{width:22,height:22,borderRadius:6,border:"1.5px solid rgba(100,160,100,0.28)",flexShrink:0}}></div>
-                            <span style={{color:"#c8e0b8",fontSize:14}}>{ing}</span>
+                          <div key={i} style={{display:"flex",alignItems:"center",gap:12,padding:"9px 0",borderBottom:"1px solid rgba(245,240,232,0.06)",cursor:"pointer"}} onClick={()=>togTick(ing)}>
+                            <div style={{width:22,height:22,borderRadius:6,border:"1.5px solid rgba(245,240,232,0.2)",flexShrink:0}}/>
+                            <span style={{color:C.cLight,fontSize:14}}>{ing}</span>
                           </div>
                         ))}
                         {tk2.map((ing,i)=>(
-                          <div key={i} style={{display:"flex",alignItems:"center",gap:12,padding:"9px 0",borderBottom:"1px solid rgba(100,160,100,0.07)",cursor:"pointer"}} onClick={()=>toggleTick(ing)}>
-                            <div style={{width:22,height:22,borderRadius:6,background:"#5cb85c",border:"1.5px solid #5cb85c",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,color:"#fff"}}>✓</div>
-                            <span style={{textDecoration:"line-through",color:"#6a8a6a",fontSize:14}}>{ing}</span>
+                          <div key={i} style={{display:"flex",alignItems:"center",gap:12,padding:"9px 0",borderBottom:"1px solid rgba(245,240,232,0.06)",cursor:"pointer"}} onClick={()=>togTick(ing)}>
+                            <div style={{width:22,height:22,borderRadius:6,background:C.done,border:"1.5px solid "+C.done,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,color:"#fff"}}>✓</div>
+                            <span style={{textDecoration:"line-through",color:C.cFaint,fontSize:14}}>{ing}</span>
                           </div>
                         ))}
                       </div>
                     );
                   })}
-                  <div style={{...glass,padding:"16px 18px"}}>
-                    <div style={{fontFamily:"'DM Serif Display',serif",fontSize:17,color:"#e8f0e4",marginBottom:12}}>Extra items</div>
+                  <div style={{...glassBase,padding:"16px 18px"}}>
+                    <div style={{fontFamily:"'DM Serif Display',serif",fontSize:17,color:C.cWhite,marginBottom:12}}>Extra items</div>
                     {custom.map((item,i)=>(
-                      <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"9px 0",borderBottom:"1px solid rgba(100,160,100,0.07)"}}>
-                        <div style={{flex:1,display:"flex",alignItems:"center",gap:10,cursor:"pointer"}} onClick={()=>toggleTick("__c__"+item)}>
-                          <div style={{width:22,height:22,borderRadius:6,...(ticks["__c__"+item]?{background:"#5cb85c",border:"1.5px solid #5cb85c"}:{border:"1.5px solid rgba(100,160,100,0.28)"}),flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,color:"#fff"}}>{ticks["__c__"+item]?"✓":""}</div>
-                          <span style={{textDecoration:ticks["__c__"+item]?"line-through":"none",color:ticks["__c__"+item]?"#6a8a6a":"#c8e0b8",fontSize:14}}>{item}</span>
+                      <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"9px 0",borderBottom:"1px solid rgba(245,240,232,0.06)"}}>
+                        <div style={{flex:1,display:"flex",alignItems:"center",gap:10,cursor:"pointer"}} onClick={()=>togTick("__c__"+item)}>
+                          <div style={{width:22,height:22,borderRadius:6,...(ticks["__c__"+item]?{background:C.done,border:"1.5px solid "+C.done}:{border:"1.5px solid rgba(245,240,232,0.2)"}),flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,color:"#fff"}}>{ticks["__c__"+item]?"✓":""}</div>
+                          <span style={{textDecoration:ticks["__c__"+item]?"line-through":"none",color:ticks["__c__"+item]?C.cFaint:C.cLight,fontSize:14}}>{item}</span>
                         </div>
-                        <button onClick={()=>{const u=custom.filter((_,idx)=>idx!==i);setCustom(u);try{localStorage.setItem("ci",JSON.stringify(u));}catch(e){}}} style={{background:"none",border:"none",color:"#6a8a6a",fontSize:16,cursor:"pointer",padding:"2px 6px"}}>✕</button>
+                        <button onClick={()=>{const u=custom.filter((_,idx)=>idx!==i);setCustom(u);try{localStorage.setItem("ci",JSON.stringify(u));}catch(e){}}} style={{background:"none",border:"none",color:C.cDim,fontSize:16,cursor:"pointer",padding:"2px 6px"}}>✕</button>
                       </div>
                     ))}
                     <div style={{display:"flex",gap:8,marginTop:12}}>
@@ -655,7 +681,7 @@ function App(){
                         onKeyDown={e=>{if(e.key==="Enter"&&newItem.trim()){const u=[...custom,newItem.trim()];setCustom(u);setNewItem("");try{localStorage.setItem("ci",JSON.stringify(u));}catch(ex){}}}}
                         placeholder="Add anything..."/>
                       <button onClick={()=>{if(!newItem.trim())return;const u=[...custom,newItem.trim()];setCustom(u);setNewItem("");try{localStorage.setItem("ci",JSON.stringify(u));}catch(e){}}}
-                        style={{background:"#6db870",border:"none",borderRadius:10,color:"#1a2e20",fontWeight:700,fontSize:20,width:44,height:44,cursor:"pointer",flexShrink:0}}>+</button>
+                        style={{background:C.sage,border:"none",borderRadius:10,color:C.fDeep,fontWeight:700,fontSize:20,width:44,height:44,cursor:"pointer",flexShrink:0}}>+</button>
                     </div>
                   </div>
                 </div>
@@ -666,9 +692,9 @@ function App(){
 
       </div>
 
-      <div style={{borderTop:"1px solid rgba(100,160,100,0.08)",padding:"14px 24px",display:"flex",justifyContent:"space-between",maxWidth:860,margin:"0 auto",width:"100%"}}>
-        <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:"#3a5a3a",letterSpacing:"0.06em"}}>dataiscool.com/Recipes</span>
-        <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:"#3a5a3a",opacity:0.5}}>made with Claude</span>
+      <div style={{borderTop:"1px solid rgba(245,240,232,0.07)",padding:"14px 24px",display:"flex",justifyContent:"space-between",maxWidth:860,margin:"0 auto",width:"100%"}}>
+        <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:C.cFaint,letterSpacing:"0.06em"}}>dataiscool.com/Recipes</span>
+        <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:C.cFaint,opacity:0.5}}>made with Claude</span>
       </div>
     </div>
   );
