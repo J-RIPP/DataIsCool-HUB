@@ -1,344 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>DataIsCool — Your Apps</title>
-  <meta name="description" content="A personal hub for all DataIsCool apps." />
-  <meta name="theme-color" content="#1e3028" />
+  <meta name="description" content="A personal hub for all DataIsCool apps."/>
+  <meta name="theme-color" content="#1a2e20"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --sky:     #c8e0a8;
-      --bg:      #1e3028;
-      --card:    #2a4038;
-      --card2:   #304840;
-      --border:  #3a5848;
-      --border2: #4a6858;
-      --accent:  #6db870;
-      --gold:    #c8a84b;
-      --text:    #e8f0e4;
-      --muted:   #9ab89a;
-      --dim:     #6a8a6a;
-      --faint:   #3a5a3a;
+    :root{
+      --f-deep:#1a2e20;--f-mid:#2a4232;--f-light:#334e3e;--f-mist:#3d5c4a;
+      --c-white:#f5f0e8;--c-light:#e8e0d0;--c-muted:#c8bca8;--c-dim:#9a8e7c;--c-faint:#6a5e4e;
+      --sage:#6db870;--amber:#c8a84b;
     }
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Syne', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--f-deep);color:var(--c-light);font-family:"Syne",sans-serif;min-height:100vh;overflow-x:hidden}
 
-    /* ── World background ── */
-    .world {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-    }
-    .world::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        #c8e0a8 0%,
-        #a0c890 8%,
-        #70a870 18%,
-        #3a6848 35%,
-        #243830 55%,
-        #1a2e24 100%
-      );
-    }
-    .world::after {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 120% 40% at 50% 20%, rgba(180,220,160,0.2) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 20% at 75% 28%, rgba(200,168,75,0.07) 0%, transparent 50%);
-    }
-    .mountains { position: absolute; bottom: 0; left: 0; width: 100%; }
-    .ground-fade {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 70%;
-      background: linear-gradient(to top, var(--bg) 0%, var(--bg) 25%, rgba(30,48,40,0.92) 50%, transparent 100%);
-    }
-    .birds {
-      position: absolute; top: 5%; left: 55%;
-      opacity: 0.3;
-    }
+    /* World */
+    .world{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .world::before{content:"";position:absolute;inset:0;
+      background:linear-gradient(to bottom,#ddecc8 0%,#b8d4a0 7%,#7aaa6a 17%,#3a6040 32%,#243830 50%,#1a2e20 70%,#141f18 100%)}
+    .world::after{content:"";position:absolute;inset:0;
+      background:radial-gradient(ellipse 110% 30% at 50% 16%,rgba(220,240,180,0.22) 0%,transparent 60%),
+                  radial-gradient(ellipse 50% 18% at 75% 22%,rgba(200,168,75,0.08) 0%,transparent 50%)}
+    .mountains{position:absolute;bottom:0;left:0;width:100%}
+    .ground{position:absolute;bottom:0;left:0;right:0;height:70%;
+      background:linear-gradient(to top,var(--f-deep) 0%,var(--f-deep) 25%,rgba(26,46,32,0.93) 50%,transparent 100%)}
 
-    #page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+    #page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 24px 80px}
 
-    /* ── Header ── */
-    header {
-      padding: 64px 0 52px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.1s;
-    }
-    .logo-row {
-      display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
-    }
-    .logo-mark {
-      width: 48px; height: 48px;
-    }
-    .logo-name {
-      font-family: 'DM Mono', monospace;
-      font-size: 13px; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted);
-    }
-    .hero-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.6rem, 6vw, 4rem);
-      line-height: 1.05;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-    .hero-title em { font-style: italic; color: var(--accent); }
-    .hero-sub {
-      font-size: 15px; color: var(--muted);
-      max-width: 420px; line-height: 1.65; font-weight: 400;
-    }
+    header{padding:64px 0 48px;opacity:0;animation:up 0.7s ease forwards 0.1s}
+    .logo-row{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+    .logo-name{font-family:"DM Mono",monospace;font-size:13px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-muted)}
+    .hero{font-family:"DM Serif Display",serif;font-size:clamp(2.6rem,6vw,4rem);line-height:1.05;color:var(--c-white);letter-spacing:-0.02em;margin-bottom:16px}
+    .hero em{font-style:italic;color:var(--sage)}
+    .sub{font-size:15px;color:var(--c-muted);max-width:420px;line-height:1.65}
+    .div{height:1px;background:linear-gradient(to right,rgba(245,240,232,0.15),rgba(245,240,232,0.05),transparent);margin:8px 0 40px;opacity:0;animation:up 0.5s ease forwards 0.35s}
+    .sec-label{font-family:"DM Mono",monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-faint);margin-bottom:20px;opacity:0;animation:up 0.5s ease forwards 0.45s}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 
-    /* ── Divider ── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(to right, rgba(109,184,112,0.3), rgba(109,184,112,0.1), transparent);
-      margin: 8px 0 40px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.35s;
-    }
+    .acard{background:rgba(26,46,32,0.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(245,240,232,0.09);border-radius:18px;padding:28px;
+      text-decoration:none;color:var(--c-light);display:flex;flex-direction:column;gap:18px;
+      position:relative;overflow:hidden;
+      transition:transform 0.22s ease,border-color 0.22s ease,background 0.22s ease,box-shadow 0.22s ease;
+      opacity:0;animation:up 0.5s ease forwards}
+    .acard::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,240,232,0.03) 0%,transparent 60%);opacity:0;transition:opacity 0.3s}
+    .acard:hover::before{opacity:1}
+    .acard:hover{transform:translateY(-4px);border-color:rgba(245,240,232,0.18);background:rgba(34,56,40,0.88);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+    .acard.coming{cursor:default}
+    .acard.coming:hover{transform:none;box-shadow:none}
 
-    /* ── Section label ── */
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--faint);
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.45s;
-    }
+    .cicon{width:52px;height:52px;border-radius:14px;background:rgba(245,240,232,0.05);border:1px solid rgba(245,240,232,0.09);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+    .ctitle{font-family:"DM Serif Display",serif;font-size:21px;color:var(--c-white);margin-bottom:7px;letter-spacing:-0.01em}
+    .cdesc{font-size:13px;color:var(--c-muted);line-height:1.65}
+    .cfoot{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+    .tag{font-family:"DM Mono",monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;font-weight:500}
+    .tag-live{background:rgba(109,184,112,0.15);color:var(--sage);border:1px solid rgba(109,184,112,0.25)}
+    .tag-soon{background:rgba(245,240,232,0.05);color:var(--c-faint);border:1px solid rgba(245,240,232,0.08)}
+    .arr{width:32px;height:32px;border-radius:50%;background:rgba(109,184,112,0.1);border:1px solid rgba(109,184,112,0.2);display:flex;align-items:center;justify-content:center;color:var(--sage);font-size:14px;transition:background 0.2s,transform 0.2s}
+    .acard:hover .arr{background:rgba(109,184,112,0.2);transform:translateX(2px)}
 
-    /* ── App grid ── */
-    .app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
+    footer{margin-top:80px;padding-top:20px;border-top:1px solid rgba(245,240,232,0.08);display:flex;align-items:center;justify-content:space-between;opacity:0;animation:up 0.5s ease forwards 0.9s}
+    .ft{font-family:"DM Mono",monospace;font-size:11px;color:var(--c-faint);letter-spacing:0.08em}
 
-    /* ── App card ── */
-    .app-card {
-      background: rgba(36,56,48,0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(100,160,100,0.15);
-      border-radius: 18px;
-      padding: 28px;
-      text-decoration: none;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
-    }
-    .app-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(109,184,112,0.05) 0%, transparent 60%);
-      opacity: 0; transition: opacity 0.3s;
-    }
-    .app-card:hover::before { opacity: 1; }
-    .app-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(109,184,112,0.3);
-      background: rgba(42,64,56,0.85);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-    }
-    .app-card.coming { cursor: default; }
-    .app-card.coming:hover { transform: none; box-shadow: none; }
-
-    .card-icon {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      background: rgba(20,40,30,0.6);
-      border: 1px solid rgba(100,160,100,0.15);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px; flex-shrink: 0;
-    }
-    .card-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 20px; color: var(--text);
-      margin-bottom: 6px; letter-spacing: -0.01em;
-    }
-    .card-desc {
-      font-size: 13px; color: var(--muted);
-      line-height: 1.6; font-weight: 400;
-    }
-    .card-footer {
-      display: flex; align-items: center; justify-content: space-between; margin-top: auto;
-    }
-    .tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 4px 12px;
-      border-radius: 20px; font-weight: 500;
-    }
-    .tag-live {
-      background: rgba(109,184,112,0.15);
-      color: var(--accent);
-      border: 1px solid rgba(109,184,112,0.25);
-    }
-    .tag-soon {
-      background: rgba(58,90,58,0.3);
-      color: var(--faint);
-      border: 1px solid rgba(100,160,100,0.1);
-    }
-    .card-arrow {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(109,184,112,0.12);
-      border: 1px solid rgba(109,184,112,0.2);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--accent); font-size: 14px;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .app-card:hover .card-arrow {
-      background: rgba(109,184,112,0.22);
-      transform: translateX(2px);
-    }
-
-    /* ── Footer ── */
-    footer {
-      margin-top: 80px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(100,160,100,0.12);
-      display: flex; align-items: center; justify-content: space-between;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.9s;
-    }
-    .footer-text {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px; color: var(--faint);
-      letter-spacing: 0.08em;
-    }
-
-    /* ── Animation ── */
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(14px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-
-    /* ── Mobile ── */
-    @media (max-width: 540px) {
-      #page { padding: 0 16px 60px; }
-      header { padding: 44px 0 36px; }
-      .app-grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: 2.2rem; }
-    }
+    @keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:540px){#page{padding:0 16px 60px}header{padding:44px 0 36px}.grid{grid-template-columns:1fr}.hero{font-size:2.2rem}}
   </style>
 </head>
 <body>
-
 <div class="world">
-  <div class="birds">
-    <svg width="140" height="50" viewBox="0 0 140 50" fill="none">
-      <path d="M8 28 Q12 23 16 28" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M26 20 Q31 15 36 20" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M50 12 Q55 7 60 12" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M72 16 Q77 11 82 16" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M96 8 Q101 3 106 8" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M118 20 Q122 15 126 20" stroke="#2a4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    </svg>
-  </div>
   <div class="mountains">
-    <svg viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;width:100%;height:auto;min-height:240px;">
-      <!-- Far range -->
-      <path d="M0,500 L0,320 L80,260 L160,295 L240,215 L320,265 L400,175 L480,225 L560,145 L640,195 L720,115 L800,165 L880,95 L960,155 L1040,75 L1120,135 L1200,155 L1280,115 L1360,175 L1440,135 L1440,500 Z" fill="#3a6040" opacity="0.5"/>
-      <!-- Mid range -->
-      <path d="M0,500 L0,375 L100,315 L180,345 L260,275 L360,305 L440,245 L520,285 L600,215 L680,255 L760,195 L840,235 L920,175 L1000,215 L1080,165 L1160,205 L1260,235 L1340,195 L1440,235 L1440,500 Z" fill="#2d5035" opacity="0.65"/>
-      <!-- Near hills -->
-      <path d="M0,500 L0,435 L120,385 L220,405 L320,365 L420,385 L520,345 L620,375 L720,335 L820,365 L920,325 L1040,355 L1140,325 L1260,355 L1360,335 L1440,355 L1440,500 Z" fill="#243830" opacity="0.85"/>
-      <!-- Foreground tree silhouette -->
-      <path d="M0,500 L0,458 L25,438 L35,458 L50,418 L62,442 L78,398 L88,428 L105,458 L125,418 L140,442 L158,408 L172,432 L188,458 L208,428 L228,452 L248,418 L268,448 L295,438 L325,413 L345,438 L375,418 L405,443 L435,413 L460,438 L488,408 L512,438 L538,418 L565,443 L595,413 L620,438 L648,418 L675,443 L705,413 L725,438 L755,418 L785,443 L815,413 L840,438 L865,418 L895,443 L925,413 L948,438 L975,418 L1005,443 L1035,413 L1058,438 L1085,418 L1115,443 L1145,413 L1168,438 L1195,418 L1225,443 L1255,413 L1278,438 L1308,418 L1338,443 L1375,418 L1405,438 L1440,418 L1440,500 Z" fill="#1a2e24"/>
+    <svg viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;width:100%;min-height:240px;">
+      <path d="M0,520 L0,310 L90,248 L170,288 L255,198 L340,258 L425,162 L515,222 L602,135 L685,195 L772,108 L855,170 L942,86 L1025,150 L1112,68 L1195,140 L1278,106 L1362,170 L1440,128 L1440,520Z" fill="#3a6040" opacity="0.45"/>
+      <path d="M0,520 L0,388 L112,322 L198,354 L278,280 L372,315 L458,248 L542,292 L628,220 L714,262 L798,198 L882,242 L968,180 L1052,225 L1138,170 L1222,218 L1312,244 L1402,200 L1440,222 L1440,520Z" fill="#2d5035" opacity="0.6"/>
+      <path d="M0,520 L0,448 L132,394 L228,415 L328,372 L430,395 L530,352 L630,380 L730,340 L830,370 L930,330 L1042,362 L1148,330 L1262,360 L1368,338 L1440,354 L1440,520Z" fill="#243830" opacity="0.8"/>
+      <path d="M0,520 L0,468 L30,448 L44,468 L60,430 L74,452 L92,422 L107,447 L122,468 L145,430 L160,452 L178,420 L195,444 L215,465 L238,432 L262,457 L285,425 L310,450 L338,437 L366,414 L388,440 L414,420 L440,445 L466,416 L490,442 L516,420 L540,445 L568,416 L592,442 L618,420 L644,446 L670,417 L692,442 L720,422 L746,447 L774,417 L798,442 L824,422 L851,447 L878,417 L901,442 L928,422 L954,447 L981,417 L1004,442 L1031,422 L1058,447 L1084,417 L1108,442 L1134,422 L1161,447 L1188,417 L1211,442 L1236,422 L1264,447 L1290,417 L1314,442 L1340,422 L1368,447 L1394,422 L1420,440 L1440,424 L1440,520Z" fill="#1a2e20"/>
     </svg>
   </div>
-  <div class="ground-fade"></div>
+  <div class="ground"></div>
 </div>
 
 <div id="page">
   <header>
     <div class="logo-row">
-      <svg class="logo-mark" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="80" height="80" rx="18" fill="rgba(36,56,48,0.85)"/>
-        <rect x="8" y="28" width="26" height="22" rx="6" stroke="#6db870" stroke-width="2.5" fill="none"/>
-        <rect x="46" y="28" width="26" height="22" rx="6" stroke="#6db870" stroke-width="2.5" fill="none"/>
-        <line x1="34" y1="39" x2="46" y2="39" stroke="#6db870" stroke-width="2.5"/>
-        <line x1="8" y1="39" x2="3" y2="39" stroke="#6db870" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="72" y1="39" x2="77" y2="39" stroke="#6db870" stroke-width="2.5" stroke-linecap="round"/>
-        <rect x="13" y="44" width="4" height="4" rx="1" fill="#6db870" opacity="0.5"/>
-        <rect x="19" y="40" width="4" height="8" rx="1" fill="#6db870" opacity="0.8"/>
-        <rect x="25" y="36" width="4" height="12" rx="1" fill="#6db870"/>
-        <polyline points="51,48 57,42 63,44 69,35" stroke="#c8a84b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="69" cy="35" r="2.5" fill="#c8a84b"/>
+      <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
+        <rect width="80" height="80" rx="18" fill="rgba(26,46,32,0.9)"/>
+        <rect x="8" y="28" width="26" height="22" rx="6" stroke="#f5f0e8" stroke-width="2.5" fill="none"/>
+        <rect x="46" y="28" width="26" height="22" rx="6" stroke="#f5f0e8" stroke-width="2.5" fill="none"/>
+        <line x1="34" y1="39" x2="46" y2="39" stroke="#f5f0e8" stroke-width="2.5"/>
+        <line x1="8" y1="39" x2="3" y2="39" stroke="#f5f0e8" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="72" y1="39" x2="77" y2="39" stroke="#f5f0e8" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="13" y="44" width="4" height="4" rx="1" fill="#6db870" opacity="0.6"/>
+        <rect x="19" y="39" width="4" height="9" rx="1" fill="#6db870" opacity="0.85"/>
+        <rect x="25" y="35" width="4" height="13" rx="1" fill="#6db870"/>
+        <polyline points="51,48 57,41 63,43 69,34" stroke="#c8a84b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="69" cy="34" r="2.5" fill="#c8a84b"/>
       </svg>
       <span class="logo-name">DataIsCool</span>
     </div>
-    <h1 class="hero-title">Your apps,<br><em>all in one place.</em></h1>
-    <p class="hero-sub">A personal hub for everything built under the DataIsCool name. Pick an app below and get started.</p>
+    <h1 class="hero">Your apps,<br><em>all in one place.</em></h1>
+    <p class="sub">A personal hub for everything built under the DataIsCool name. Pick an app below and get started.</p>
   </header>
 
-  <div class="divider"></div>
-  <p class="section-label">// Apps</p>
+  <div class="div"></div>
+  <p class="sec-label">// Apps</p>
 
-  <div class="app-grid">
-    <!-- Recipe App -->
-    <a class="app-card" href="/Recipes" style="animation-delay:0.5s;">
-      <div class="card-icon">🍽️</div>
+  <div class="grid">
+    <a class="acard" href="/Recipes" style="animation-delay:0.5s">
+      <div class="cicon">🍽️</div>
       <div>
-        <div class="card-title">Our Recipes</div>
-        <div class="card-desc">A shared recipe library and weekly meal planner with shopping lists built in. For two people, synced in real time.</div>
+        <div class="ctitle">Our Recipes</div>
+        <div class="cdesc">A shared recipe library and weekly meal planner with shopping lists built in. For two people, synced in real time.</div>
       </div>
-      <div class="card-footer">
-        <span class="tag tag-live">● Live</span>
-        <span class="card-arrow">→</span>
-      </div>
+      <div class="cfoot"><span class="tag tag-live">● Live</span><span class="arr">→</span></div>
     </a>
-
-    <!-- Coming soon 1 -->
-    <div class="app-card coming" style="animation-delay:0.6s;">
-      <div class="card-icon" style="opacity:0.35;">📊</div>
-      <div>
-        <div class="card-title" style="color:var(--muted);">Next App</div>
-        <div class="card-desc">Something new is being built here. Check back soon.</div>
-      </div>
-      <div class="card-footer">
-        <span class="tag tag-soon">Coming soon</span>
-      </div>
+    <div class="acard coming" style="animation-delay:0.6s">
+      <div class="cicon" style="opacity:0.3">📊</div>
+      <div><div class="ctitle" style="color:var(--c-dim)">Next App</div><div class="cdesc">Something new is being built here. Check back soon.</div></div>
+      <div class="cfoot"><span class="tag tag-soon">Coming soon</span></div>
     </div>
-
-    <!-- Coming soon 2 -->
-    <div class="app-card coming" style="animation-delay:0.7s;">
-      <div class="card-icon" style="opacity:0.35;">🗂️</div>
-      <div>
-        <div class="card-title" style="color:var(--muted);">Next App</div>
-        <div class="card-desc">Another tool in the works. More to come as the collection grows.</div>
-      </div>
-      <div class="card-footer">
-        <span class="tag tag-soon">Coming soon</span>
-      </div>
+    <div class="acard coming" style="animation-delay:0.7s">
+      <div class="cicon" style="opacity:0.3">🗂️</div>
+      <div><div class="ctitle" style="color:var(--c-dim)">Next App</div><div class="cdesc">Another tool in the works. More to come as the collection grows.</div></div>
+      <div class="cfoot"><span class="tag tag-soon">Coming soon</span></div>
     </div>
   </div>
 
   <footer>
-    <span class="footer-text">dataiscool.com</span>
-    <span class="footer-text" style="opacity:0.45;">made with Claude</span>
+    <span class="ft">dataiscool.com</span>
+    <span class="ft" style="opacity:0.45">made with Claude</span>
   </footer>
 </div>
-
 </body>
 </html>
